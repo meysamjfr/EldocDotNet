@@ -1,0 +1,130 @@
+﻿@{
+}
+@section styles{
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+}
+@section scripts{
+    <script src="//cdn.jsdelivr.net/npm/vue@2.6.11" type="text/javascript"></script>
+    <script src="/js/pages/tickets/index.js?@DateTime.Now.Ticks"></script>
+}
+<div class="d-flex flex-column flex-lg-row">
+    <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
+        <div class="card card-flush">
+            <div class="card-header pt-7" id="kt_chat_contacts_header">
+                <div class="w-100 position-relative">
+                    <i class="bi bi-search position-absolute top-50"></i>
+                    <div class="input-group input-group-solid">
+                        <span class="input-group-text ">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" class="form-control text-center" autocomplete="off" v-model="search" value="" placeholder="با نام کاربری یا ایمیل جستجو کنید ..." />
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-5" id="kt_chat_contacts_body">
+                <div class="scroll-y me-n5 me-5 h-200px h-lg-auto" data-kt-scroll="true"
+                     data-kt-scroll-activate="{default: false, lg: true}"
+                     data-kt-scroll-max-height="auto"
+                     data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header"
+                     data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body"
+                     data-kt-scroll-offset="0px"
+                     style="box-shadow: inset 0px -10px 20px -25px #00000066;"
+                     v-cloak>
+                    <div :class="['d-flex flex-stack py-2 my-2 bg-hover-light-info border border-white border-hover-secondary rounded', {'bg-light-primary border border-primary': currentTicket.id == ticket.id}]" v-for="ticket in tickets" v-if="tickets.length > 0" v-on:click="ShowTicket(ticket.id)">
+                        <div class="d-flex align-items-center">
+                            <div class="mx-5">
+                                <span class="fs-5 fw-bolder text-gray-900 mb-2">{{ticket.title}} - <small class="fw-bolder text-gray-700">{{ticket.user}}</small></span>
+                                <div>
+                                    <span class="fw-bold badge" v-bind:class="'badge-'+ticketStatus[ticket.status].class">{{ticketStatus[ticket.status].title}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column align-items-end mx-5">
+                            <span class="text-muted fs-7 mb-1" data-refresh="yes" v-bind:data-moment-update="ticket.updatedAt" :title="ticket.updatedAtFormatted"></span>
+                            <span class="badge badge-sm" v-bind:class="'badge-'+ticketPriority[ticket.priority].class">{{ticketPriority[ticket.priority].title}}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-stack py-4" v-else>
+                        <span>دیتا موجود نیست</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+        <div class="card h-100" id="kt_chat_messenger" v-cloak>
+            <div class="card-header"
+                 id="kt_chat_messenger_header">
+                <div class="card-title">
+                    <div :class="['d-flex justify-content-center flex-column me-3', {'d-none': currentTicket.user == ''}]">
+                        <span class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">{{currentTicket.user}}</span>
+                        <div class="mb-0 lh-1">
+                            <span class="fs-7 fw-bold text-gray-400" v-if="currentTicket.status != -1">{{ticketStatus[currentTicket.status].title}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-toolbar">
+                    <button class="btn btn-light-danger btn-sm" v-if="currentTicket.status > 0" v-on:click="CloseTicket()">بستن تیکت</button>
+                </div>
+            </div>
+            <div class="card-body" id="kt_chat_messenger_body">
+                <div class="h-100 d-flex align-items-center justify-content-center flex-column" v-if="loadingMessages">
+                    <div>
+                        <span class="fw-boldest text-gray-900">درحال دریافت تاریخچه پیام ها...</span>
+                    </div>
+                    <div>
+                        <span class="spinner-border"></span>
+                    </div>
+                </div>
+                <div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" v-if="!loadingMessages"
+                     id="kt_chat_messenger_body_scroll"
+                     data-kt-element="messages" data-kt-scroll="true"
+                     data-kt-scroll-activate="{default: false, lg: true}"
+                     data-kt-scroll-max-height="auto"
+                     data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer"
+                     data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body"
+                     data-kt-scroll-offset="-2px">
+
+                    <div class="h-100 d-flex align-items-center justify-content-center flex-column" v-if="currentTicket.user == ''">
+                        <span class="fw-boldest text-gray-900">لطفا یکی از تیکت ها را انتخاب کنید</span>
+                    </div>
+
+                    <div class="h-100 d-flex align-items-center justify-content-center flex-column" v-else-if="ticketMessages.length < 1">
+                        <span class="fw-boldest text-gray-900">هیچ پیامی ارسال نشده است</span>
+                    </div>
+
+                    <div :class="['d-flex my-10', {'justify-content-end': item.sentByUser == true}, {'justify-content-start': item.sentByUser == false}]" v-for="item in ticketMessages">
+                        <div :class="['d-flex flex-column', {'align-items-end': item.sentByUser == true}, {'align-items-start': item.sentByUser == false}]">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="symbol symbol-35px symbol-circle">
+                                    <img alt="Pic" src="/assets/media/avatars/blank.png" />
+                                </div>
+                                <div class="ms-3">
+                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1" v-if="item.sentByUser == false">پشتیبان</a>
+                                    <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1" v-else>{{currentTicket.user}}</a>
+                                    <span class="text-muted fs-7 mb-1" data-refresh="yes" v-bind:data-moment-update="item.updatedAt"></span>
+                                </div>
+                            </div>
+                            <div :class="['p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px', {'text-end': item.sentByUser == true}, {'text-start': item.sentByUser == false}]"><pre>{{item.message}}</pre></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer pt-4" id="kt_chat_messenger_footer">
+                <div :class="['d-flex flex-stack gap-5', {'d-none': currentTicket.user == ''}]">
+                    <div class="input-group">
+                        <textarea class="form-control " rows="2" id="kt_chat_messenger_input" style="resize:none" placeholder="نوشتن پیام"></textarea>
+                        <div class="input-group-text p-0">
+                                <button class="btn btn-primary w-100 h-100 rounded-start-0 align-text-bottom" type="button" v-on:click="SendChatMessage"><i class="la la-send la-rotate-180 fs-2x"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
