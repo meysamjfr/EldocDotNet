@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NetTopologySuite.Geometries;
 using Project.Application.DTOs.City;
+using Project.Application.DTOs.Page;
 using Project.Application.DTOs.Province;
 using Project.Application.DTOs.User;
 using Project.Domain.Entities;
@@ -28,6 +29,12 @@ namespace Project.Application.Profiles
             #region user
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<User, EditUserProfile>().ReverseMap();
+            #endregion
+
+            #region page
+            CreateMap<Page, PageDTO>().ReverseMap();
+            CreateMap<CreatePage, Page>();
+            CreateMap<EditPage, Page>();
             #endregion
         }
 

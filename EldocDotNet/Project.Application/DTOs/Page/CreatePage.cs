@@ -1,8 +1,6 @@
-﻿using Project.Application.DTOs.Base;
-
-namespace Project.Application.DTOs.Page
+﻿namespace Project.Application.DTOs.Page
 {
-    public class PageDTO : BaseDTO
+    public class CreatePage
     {
         public string Title { get; set; }
         public string Content { get; set; }
