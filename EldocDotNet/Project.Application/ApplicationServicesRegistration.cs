@@ -28,6 +28,7 @@ namespace Project.Application
             services.AddScoped<IProvinceService, ProvinceService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPageService, PageService>();
+            services.AddScoped<IFAQService, FAQService>();
             services.AddScoped<ITicketService, TicketService>();
 
             return services;

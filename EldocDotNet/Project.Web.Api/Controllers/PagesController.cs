@@ -16,9 +16,9 @@ namespace Project.Web.Api.Controllers
             _pageService = pageService;
         }
 
-        [HttpGet]
+        [HttpGet("{uri}")]
         [Produces(typeof(Response<PageDTO>))]
-        public async Task<JsonResult> Get([FromQuery] string uri)
+        public async Task<JsonResult> Get(string uri)
         {
             var res = await _pageService.GetPage(uri);
 
