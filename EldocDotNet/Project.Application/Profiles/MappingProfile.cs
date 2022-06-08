@@ -40,8 +40,9 @@ namespace Project.Application.Profiles
 
             #region faq
             CreateMap<FAQ, FAQDTO>().ReverseMap();
-            CreateMap<CreateFAQ, FAQ>();
-            CreateMap<EditFAQ, FAQ>();
+
+            CreateMap<UpsertFAQ, FAQ>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
             #endregion
         }
 

@@ -5,5 +5,4 @@ namespace Project.Application.Contracts.Persistence
     public interface IFAQRepository : IGenericRepository<FAQ>
     {
     }
-
 }

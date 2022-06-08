@@ -24,13 +24,7 @@ var KTDatatablesServerSide = function () {
                     }
                 },
                 { data: 'phone' },
-                {
-                    data: 'refferId',
-                    render: function (data, type, row, meta) {
-                        if (data == null) { return "ندارد"; }
-                        else { return `#${row['refferId']}. ${row['reffer']}`; }
-                    }
-                },
+                { data: 'nationalCode' },
                 {
                     data: 'updatedAt',
                     render: function (data, type, row) {
