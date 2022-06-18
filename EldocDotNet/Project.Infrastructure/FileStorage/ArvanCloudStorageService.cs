@@ -27,7 +27,7 @@ namespace Project.Infrastructure.FileStorage
         }
         public async Task DeleteFile(string containerName, string fileRoute)
         {
-            containerName = $"hishop{containerName}";
+            containerName = $"eldoc{containerName}";
 
             if (await HeadBucketAsync(containerName) == false)
             {
@@ -45,7 +45,7 @@ namespace Project.Infrastructure.FileStorage
 
         public async Task<string> SaveFile(string containerName, IFormFile file)
         {
-            containerName = $"hishop{containerName}";
+            containerName = $"eldoc{containerName}";
 
             if (await HeadBucketAsync(containerName) == false)
             {
@@ -61,7 +61,7 @@ namespace Project.Infrastructure.FileStorage
 
         private string GetFileUrl(string bucketName, string objectName)
         {
-            return $"{_s3Client.Config.ServiceURL.Substring(0, 8)}{bucketName}.{_s3Client.Config.ServiceURL.Substring(8)}/{objectName}";
+            return $"{_s3Client.Config.ServiceURL.Substring(0, 8)}{bucketName}.{_s3Client.Config.ServiceURL.Substring(8)}{objectName}";
         }
 
         private string GetObjectNameFromFileRoute(string fileRoute)

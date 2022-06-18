@@ -3,6 +3,8 @@ using NetTopologySuite.Geometries;
 using Project.Application.DTOs.City;
 using Project.Application.DTOs.FAQ;
 using Project.Application.DTOs.Page;
+using Project.Application.DTOs.Post;
+using Project.Application.DTOs.PostCategory;
 using Project.Application.DTOs.Province;
 using Project.Application.DTOs.User;
 using Project.Domain.Entities;
@@ -42,6 +44,25 @@ namespace Project.Application.Profiles
             CreateMap<FAQ, FAQDTO>().ReverseMap();
 
             CreateMap<UpsertFAQ, FAQ>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            #endregion
+
+            #region post
+            CreateMap<Post, PostDTO>()
+                .ForMember(dest => dest.PostCategory, opt => opt.MapFrom(src => src.PostCategory == null ? "" : src.PostCategory.Title))
+                .ReverseMap();
+
+            CreateMap<UpsertPost, Post>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(dest => dest.PostCategory, opt => opt.MapFrom(src => src.PostCategory == null ? "" : src.PostCategory.Title));
+            #endregion
+
+            #region post category
+            CreateMap<PostCategory, PostCategoryDTO>()
+                .ForMember(dest => dest.TotalPosts, opt => opt.MapFrom(src => src.Posts == null ? 0 : src.Posts.Count))
+                .ReverseMap();
+            CreateMap<UpsertPostCategory, PostCategory>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
             #endregion
         }

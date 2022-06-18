@@ -30,6 +30,8 @@ namespace Project.Application
             services.AddScoped<IPageService, PageService>();
             services.AddScoped<IFAQService, FAQService>();
             services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IPostCategoryService, PostCategoryService>();
 
             return services;
         }

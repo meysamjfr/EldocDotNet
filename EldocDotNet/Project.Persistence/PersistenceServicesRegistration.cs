@@ -25,6 +25,7 @@ namespace Project.Persistence
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPageRepository, PageRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IPostCategoryRepository, PostCategoryRepository>();
             services.AddScoped<IFAQRepository, FAQRepository>();
             services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddScoped<ITicketMessageRepository, TicketMessageRepository>();

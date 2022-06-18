@@ -2,7 +2,7 @@
 
 namespace Project.Application.Contracts.Persistence
 {
-    public interface IPostRepository : IGenericRepository<Post>
+    public interface IPostCategoryRepository : IGenericRepository<PostCategory>
     {
     }
 }

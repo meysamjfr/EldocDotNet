@@ -14,5 +14,12 @@
       "wwwroot/js/pages/faqs/upsert.js",
       "wwwroot/js/pages/faqs/index.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pages/postcategories/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/pages/postcategories/index.js",
+      "wwwroot/js/pages/postcategories/upsert.js"
+    ]
   }
 ]
