@@ -17,14 +17,14 @@ var KTDatatablesServerSide = function () {
             columns: [
                 { data: "id" },
                 {
-                    data: 'firstName',
-                    sort: 'firstName',
+                    data: 'firstname',
+                    sort: 'firstname',
                     render: function (data, type, row, meta) {
-                        return `${row['firstName']} ${row['lastName']}`;
+                        return `${row['firstname']} ${row['lastname']}`;
                     }
                 },
                 { data: 'phone' },
-                { data: 'nationalCode' },
+                { data: 'nationalcode' },
                 {
                     data: 'updatedAt',
                     render: function (data, type, row) {
@@ -37,8 +37,8 @@ var KTDatatablesServerSide = function () {
                     className: 'text-end',
                     render: function (data, type, row, meta) {
                         let html = '<div class="btn-group btn-group-sm px-2">';
-                        html += `<a href="/transactions?userId=${data}" class="btn btn-sm btn-icon btn-info" data-bs-toggle="tooltip" title="تراکنش ها"><i class="bi bi-cash-stack"></i></a>`;
-                        html += `<a href="/usercards?userId=${data}" class="btn btn-sm btn-icon btn-info" data-bs-toggle="tooltip" title="کارت ها"><i class="bi bi-credit-card"></i></a>`;
+                        //html += `<a href="/transactions?userId=${data}" class="btn btn-sm btn-icon btn-info" data-bs-toggle="tooltip" title="تراکنش ها"><i class="bi bi-cash-stack"></i></a>`;
+                        //html += `<a href="/usercards?userId=${data}" class="btn btn-sm btn-icon btn-info" data-bs-toggle="tooltip" title="کارت ها"><i class="bi bi-credit-card"></i></a>`;
                         html += "</div>";
                         return html;
                     }
