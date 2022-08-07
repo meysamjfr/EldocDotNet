@@ -17,10 +17,107 @@ namespace Project.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Project.Domain.Entities.Base.ContractBase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AfterSaleServices")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ContractSubject")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstPartyOfService")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Guarantee")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecondPartyOfService")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectToGovernmentLaw")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubjectToGovernmentLawType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ContractBase");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("ContractBase");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.BilateralContractTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ContractType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BilateralContractTemplates");
+                });
 
             modelBuilder.Entity("Project.Domain.Entities.City", b =>
                 {
@@ -69,6 +166,57 @@ namespace Project.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Project.Domain.Entities.ContractPartyAttorney", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AttachmentUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ContractId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DangShare")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFirstParty")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Regulatory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.ToTable("ContractPartyAttorney");
+                });
+
             modelBuilder.Entity("Project.Domain.Entities.FAQ", b =>
                 {
                     b.Property<int>("Id")
@@ -112,6 +260,40 @@ namespace Project.Persistence.Migrations
                             Question = "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
                             UpdatedAt = new DateTime(2022, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc)
                         });
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.FinancialContractTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ContractType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FinancialContractTemplates");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.Page", b =>
@@ -385,6 +567,40 @@ namespace Project.Persistence.Migrations
                     b.ToTable("TicketMessages");
                 });
 
+            modelBuilder.Entity("Project.Domain.Entities.UnilateralContractTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ContractType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnilateralContractTemplates");
+                });
+
             modelBuilder.Entity("Project.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -458,6 +674,54 @@ namespace Project.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Project.Domain.Entities.BilateralContract", b =>
+                {
+                    b.HasBaseType("Project.Domain.Entities.Base.ContractBase");
+
+                    b.Property<int>("ContractType")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SecondUserId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("SecondUserId");
+
+                    b.HasDiscriminator().HasValue("BilateralContract");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.FinancialContract", b =>
+                {
+                    b.HasBaseType("Project.Domain.Entities.Base.ContractBase");
+
+                    b.Property<int>("ContractType")
+                        .HasColumnType("int")
+                        .HasColumnName("FinancialContract_ContractType");
+
+                    b.HasDiscriminator().HasValue("FinancialContract");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.UnilateralContract", b =>
+                {
+                    b.HasBaseType("Project.Domain.Entities.Base.ContractBase");
+
+                    b.Property<int>("ContractType")
+                        .HasColumnType("int")
+                        .HasColumnName("UnilateralContract_ContractType");
+
+                    b.HasDiscriminator().HasValue("UnilateralContract");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.Base.ContractBase", b =>
+                {
+                    b.HasOne("Project.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Project.Domain.Entities.City", b =>
                 {
                     b.HasOne("Project.Domain.Entities.Province", "Province")
@@ -467,6 +731,17 @@ namespace Project.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Province");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.ContractPartyAttorney", b =>
+                {
+                    b.HasOne("Project.Domain.Entities.Base.ContractBase", "Contract")
+                        .WithMany("PartyAttorneys")
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contract");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.Post", b =>
@@ -500,6 +775,20 @@ namespace Project.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Ticket");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.BilateralContract", b =>
+                {
+                    b.HasOne("Project.Domain.Entities.User", "SecondUser")
+                        .WithMany()
+                        .HasForeignKey("SecondUserId");
+
+                    b.Navigation("SecondUser");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.Base.ContractBase", b =>
+                {
+                    b.Navigation("PartyAttorneys");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.PostCategory", b =>

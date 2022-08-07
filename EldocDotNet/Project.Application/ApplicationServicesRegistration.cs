@@ -32,6 +32,9 @@ namespace Project.Application
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IPostCategoryService, PostCategoryService>();
+            services.AddScoped<IUnilateralContractTemplateService, UnilateralContractTemplateService>();
+            services.AddScoped<IBilateralContractTemplateService, BilateralContractTemplateService>();
+            services.AddScoped<IFinancialContractTemplateService, FinancialContractTemplateService>();
 
             return services;
         }

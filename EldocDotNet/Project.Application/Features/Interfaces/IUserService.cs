@@ -13,7 +13,7 @@ namespace Project.Application.Features.Interfaces
         Task<UserDTO> GetByToken(string token);
         Task<UserDTO> GetProfile();
         Task<UserDTO> Login(LoginUser input);
-        Task SetPassword(string newPassword);
+        Task<bool> SetPassword(string newPassword);
         Task Signup(string phone);
         Task<string> Verify(VerifyUser verify);
     }

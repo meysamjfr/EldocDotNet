@@ -39,18 +39,18 @@ builder.Services.AddCors(o =>
     var allowedOriginsList = allowedOrigins.Split(',');
     //var allowedOrigins = builder.Configuration.GetValue<string[]>("AllowedOrigins");
     o.AddPolicy("CorsPolicy",
-        builder => builder.WithOrigins(allowedOrigins)
-        .AllowAnyMethod()
-        .AllowAnyHeader());
+        builder => builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "https://localhost:3000", "https://localhost:3001", "http://eldoc.ir", "https://eldoc.ir")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
 });
 
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseDeveloperExceptionPage();
-}
+//}
 
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<JwtMiddleware>();

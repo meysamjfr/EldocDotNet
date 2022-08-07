@@ -29,6 +29,12 @@ namespace Project.Persistence
             services.AddScoped<IFAQRepository, FAQRepository>();
             services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddScoped<ITicketMessageRepository, TicketMessageRepository>();
+            services.AddScoped<IUnilateralContractRepository, UnilateralContractRepository>();
+            services.AddScoped<IBilateralContractRepository, BilateralContractRepository>();
+            services.AddScoped<IFinancialContractRepository, FinancialContractRepository>();
+            services.AddScoped<IUnilateralContractTemplateRepository, UnilateralContractTemplateRepository>();
+            services.AddScoped<IBilateralContractTemplateRepository, BilateralContractTemplateRepository>();
+            services.AddScoped<IFinancialContractTemplateRepository, FinancialContractTemplateRepository>();
 
             return services;
         }

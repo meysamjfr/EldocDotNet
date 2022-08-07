@@ -11,13 +11,13 @@ namespace Project.Web.Api.Extensions
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Project API Documents",
-                    Description = "Project API Swagger Documentation ",
+                    Title = "ELDoc API Documents",
+                    Description = "ELDoc API Swagger Documentation ",
                     TermsOfService = new Uri("https://Project.ir"),
                     Contact = new OpenApiContact
                     {
                         Name = "Project Develpoers",
-                        Email = "dev@Project.ir",
+                        Email = "dev@eldoc.ir",
                         Url = new Uri("https://Project.ir"),
                     },
                 });

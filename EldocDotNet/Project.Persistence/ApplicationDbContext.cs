@@ -44,5 +44,11 @@ namespace Project.Persistence
         public DbSet<TicketMessage> TicketMessages { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<BilateralContract> BilateralContracts { get; set; }
+        public DbSet<UnilateralContract> UnilateralContracts { get; set; }
+        public DbSet<FinancialContract> FinancialContracts { get; set; }
+        public DbSet<BilateralContractTemplate> BilateralContractTemplates { get; set; }
+        public DbSet<UnilateralContractTemplate> UnilateralContractTemplates { get; set; }
+        public DbSet<FinancialContractTemplate> FinancialContractTemplates { get; set; }
     }
 }

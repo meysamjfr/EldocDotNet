@@ -21,5 +21,26 @@
       "wwwroot/js/pages/postcategories/index.js",
       "wwwroot/js/pages/postcategories/upsert.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pages/unilateralcontracttemplates/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/pages/unilateralcontracttemplates/index.js",
+      "wwwroot/js/pages/unilateralcontracttemplates/upsert.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pages/bilateralcontracttemplates/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/pages/bilateralcontracttemplates/index.js",
+      "wwwroot/js/pages/bilateralcontracttemplates/upsert.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pages/financialcontracttemplates/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/pages/financialcontracttemplates/index.js",
+      "wwwroot/js/pages/financialcontracttemplates/upsert.js"
+    ]
   }
 ]

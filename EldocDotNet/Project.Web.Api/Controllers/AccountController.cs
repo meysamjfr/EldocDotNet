@@ -22,7 +22,7 @@ namespace Project.Web.Api.Controllers
 
         [HttpPost("login")]
         [Produces(typeof(Response<UserDTO>))]
-        public async Task<JsonResult> Login([FromForm] LoginUser input)
+        public async Task<JsonResult> Login([FromBody] LoginUser input)
         {
             var res = await _userService.Login(input);
 
@@ -31,16 +31,16 @@ namespace Project.Web.Api.Controllers
 
         [HttpPost("signup")]
         [Produces(typeof(Response<string>))]
-        public async Task<JsonResult> Signup([FromForm] string phone)
+        public async Task<JsonResult> Signup([FromBody] SignupUser input)
         {
-            await _userService.Signup(phone);
+            await _userService.Signup(input.Phone);
 
             return Response<string>.Succeed();
         }
 
         [HttpPost("verify")]
         [Produces(typeof(Response<string>))]
-        public async Task<JsonResult> Verify([FromForm] VerifyUser input)
+        public async Task<JsonResult> Verify([FromBody] VerifyUser input)
         {
             var res = await _userService.Verify(input);
 
@@ -50,9 +50,9 @@ namespace Project.Web.Api.Controllers
         [UserAuthorize]
         [HttpPost("set-password")]
         [Produces(typeof(Response<string>))]
-        public async Task<JsonResult> SetPassword([FromForm] string newPassword)
+        public async Task<JsonResult> SetPassword([FromBody] SetPasswordUser input)
         {
-            await _userService.SetPassword(newPassword);
+            await _userService.SetPassword(input.NewPassword);
 
             return Response<string>.Succeed();
         }
@@ -68,9 +68,9 @@ namespace Project.Web.Api.Controllers
         }
 
         [UserAuthorize]
-        [HttpPut("profile")]
+        [HttpPost("profile")]
         [Produces(typeof(Response<UserDTO>))]
-        public async Task<JsonResult> EditProfile([FromForm] EditUserProfile input)
+        public async Task<JsonResult> EditProfile([FromBody] EditUserProfile input)
         {
             var res = await _userService.EditProfile(input);
 

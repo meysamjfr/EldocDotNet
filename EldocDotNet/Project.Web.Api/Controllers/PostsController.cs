@@ -18,10 +18,10 @@ namespace Project.Web.Api.Controllers
             _postService = postService;
             _postCategoryService = postCategoryService;
         }
-        
+
         [HttpGet]
         [Produces(typeof(Response<List<PostDTO>>))]
-        public async Task<JsonResult> GetAll(FilterPosts input)
+        public async Task<JsonResult> GetAll([FromQuery] FilterPosts input)
         {
             var res = await _postService.FilterPaginate(input);
 

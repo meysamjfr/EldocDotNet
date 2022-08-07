@@ -3,9 +3,7 @@ var KTDocsAdd = function () {
     const baseUrl = '/faqs';
     const t = document.getElementById("info_modal"),
         e = t.querySelector("#modal_form"),
-        boomodal = new bootstrap.Modal(t, {
-            backdrop: 'static'
-        });
+        boomodal = new bootstrap.Modal(t);
     return {
         init: function () {
             (() => {

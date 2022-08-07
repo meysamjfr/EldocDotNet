@@ -41,7 +41,7 @@ namespace Project.Application.Features.Services
         public async Task<UserDTO> Login(LoginUser input)
         {
             var find = await _userRepository.GetAllQueryable()
-                .FirstOrDefaultAsync(f => f.Nationalcode == input.Username || f.Phone == input.Username || f.Email == input.Username);
+                .FirstOrDefaultAsync(f => f.Phone == input.Username || f.Nationalcode == input.Username || f.Phone == input.Username || f.Email == input.Username);
 
             if (find == null)
             {
@@ -121,13 +121,20 @@ namespace Project.Application.Features.Services
             return findUser.Token;
         }
 
-        public async Task SetPassword(string newPassword)
+        public async Task<bool> SetPassword(string newPassword)
         {
+            if (await _userRepository.Exist(Current().Id) == false)
+            {
+                return false;
+            }
+
             var model = _mapper.Map<User>(Current());
 
             model.Password = newPassword;
 
             await _userRepository.Update(model);
+
+            return true;
         }
 
         public async Task<UserDTO> EditProfile(EditUserProfile input)

@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using NetTopologySuite.Geometries;
+using Project.Application.DTOs.BilateralContractTemplate;
 using Project.Application.DTOs.City;
 using Project.Application.DTOs.FAQ;
+using Project.Application.DTOs.FinancialContractTemplate;
 using Project.Application.DTOs.Page;
 using Project.Application.DTOs.Post;
 using Project.Application.DTOs.PostCategory;
 using Project.Application.DTOs.Province;
+using Project.Application.DTOs.UnilateralContractTemplate;
 using Project.Application.DTOs.User;
 using Project.Domain.Entities;
 
@@ -65,7 +68,31 @@ namespace Project.Application.Profiles
             CreateMap<UpsertPostCategory, PostCategory>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
             #endregion
-        }
 
+            #region unilateral contract template
+            CreateMap<UnilateralContractTemplate, UnilateralContractTemplateDTO>().ReverseMap();
+
+            CreateMap<UpsertUnilateralContractTemplate, UnilateralContractTemplate>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            #endregion
+
+            #region bilateral contract template
+            CreateMap<BilateralContractTemplate, BilateralContractTemplateDTO>().ReverseMap();
+
+            CreateMap<UpsertBilateralContractTemplate, BilateralContractTemplate>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            #endregion
+
+            #region financial contract template
+            CreateMap<FinancialContractTemplate, FinancialContractTemplateDTO>().ReverseMap();
+
+            CreateMap<UpsertFinancialContractTemplate, FinancialContractTemplate>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            #endregion
+
+
+
+
+        }
     }
 }
