@@ -2,6 +2,7 @@
 using NetTopologySuite.Geometries;
 using Project.Application.DTOs.BilateralContractTemplate;
 using Project.Application.DTOs.City;
+using Project.Application.DTOs.Expert;
 using Project.Application.DTOs.FAQ;
 using Project.Application.DTOs.FinancialContractTemplate;
 using Project.Application.DTOs.Page;
@@ -90,6 +91,14 @@ namespace Project.Application.Profiles
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
             #endregion
 
+            #region experts
+            CreateMap<Expert, ExpertDTO>()
+                .ForMember(dest => dest.Password, opt => opt.Ignore())
+                .ReverseMap();
+            CreateMap<Expert, UpsertExpert>()
+                .ForMember(dest => dest.Password, opt => opt.Ignore())
+                .ReverseMap();
+            #endregion
 
 
 

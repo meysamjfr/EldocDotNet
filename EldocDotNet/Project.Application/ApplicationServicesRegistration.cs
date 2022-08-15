@@ -35,6 +35,7 @@ namespace Project.Application
             services.AddScoped<IUnilateralContractTemplateService, UnilateralContractTemplateService>();
             services.AddScoped<IBilateralContractTemplateService, BilateralContractTemplateService>();
             services.AddScoped<IFinancialContractTemplateService, FinancialContractTemplateService>();
+            services.AddScoped<IExpertService, ExpertService>();
 
             return services;
         }

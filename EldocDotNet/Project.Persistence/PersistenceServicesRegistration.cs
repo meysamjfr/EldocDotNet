@@ -35,6 +35,7 @@ namespace Project.Persistence
             services.AddScoped<IUnilateralContractTemplateRepository, UnilateralContractTemplateRepository>();
             services.AddScoped<IBilateralContractTemplateRepository, BilateralContractTemplateRepository>();
             services.AddScoped<IFinancialContractTemplateRepository, FinancialContractTemplateRepository>();
+            services.AddScoped<IExpertRepository, ExpertRepository>();
 
             return services;
         }

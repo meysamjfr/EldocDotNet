@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Application", "EldocDotNet\Project.Application\Project.Application.csproj", "{18FBFE25-FC0F-42A2-8999-3E3C118D904C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Application", "EldocDotNet\Project.Application\Project.Application.csproj", "{18FBFE25-FC0F-42A2-8999-3E3C118D904C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Domain", "EldocDotNet\Project.Domain\Project.Domain.csproj", "{C0ECBC55-B7E3-4E67-BEC9-D411C0A2A38A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Domain", "EldocDotNet\Project.Domain\Project.Domain.csproj", "{C0ECBC55-B7E3-4E67-BEC9-D411C0A2A38A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Infrastructure", "EldocDotNet\Project.Infrastructure\Project.Infrastructure.csproj", "{A0832AB5-77A5-4E4B-8243-C91FCDE7A2B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Infrastructure", "EldocDotNet\Project.Infrastructure\Project.Infrastructure.csproj", "{A0832AB5-77A5-4E4B-8243-C91FCDE7A2B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Persistence", "EldocDotNet\Project.Persistence\Project.Persistence.csproj", "{E1EF4C7D-33AD-43FC-8BA9-50213E739D66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Persistence", "EldocDotNet\Project.Persistence\Project.Persistence.csproj", "{E1EF4C7D-33AD-43FC-8BA9-50213E739D66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Web.Admin", "EldocDotNet\Project.Web.Admin\Project.Web.Admin.csproj", "{D60320D1-B2C5-4A6F-A35B-C2A14AF71F81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Web.Admin", "EldocDotNet\Project.Web.Admin\Project.Web.Admin.csproj", "{D60320D1-B2C5-4A6F-A35B-C2A14AF71F81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Web.Api", "EldocDotNet\Project.Web.Api\Project.Web.Api.csproj", "{F78DF0D0-797A-400B-A7EF-5BCB96159D57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Web.Api", "EldocDotNet\Project.Web.Api\Project.Web.Api.csproj", "{F78DF0D0-797A-400B-A7EF-5BCB96159D57}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BC035694-DD0B-4EDD-B495-ECF72192E661}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D0C01448-C522-4060-82E1-53963A20A66D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{AC82251C-DD16-4B18-A90C-C5CC6D28215C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Web.Experts", "EldocDotNet\Project.Web.Experts\Project.Web.Experts.csproj", "{7EFC3A33-C7C1-47CD-99C8-CE06C0765AFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{F78DF0D0-797A-400B-A7EF-5BCB96159D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F78DF0D0-797A-400B-A7EF-5BCB96159D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F78DF0D0-797A-400B-A7EF-5BCB96159D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EFC3A33-C7C1-47CD-99C8-CE06C0765AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EFC3A33-C7C1-47CD-99C8-CE06C0765AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EFC3A33-C7C1-47CD-99C8-CE06C0765AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EFC3A33-C7C1-47CD-99C8-CE06C0765AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{E1EF4C7D-33AD-43FC-8BA9-50213E739D66} = {D0C01448-C522-4060-82E1-53963A20A66D}
 		{D60320D1-B2C5-4A6F-A35B-C2A14AF71F81} = {AC82251C-DD16-4B18-A90C-C5CC6D28215C}
 		{F78DF0D0-797A-400B-A7EF-5BCB96159D57} = {AC82251C-DD16-4B18-A90C-C5CC6D28215C}
+		{7EFC3A33-C7C1-47CD-99C8-CE06C0765AFE} = {AC82251C-DD16-4B18-A90C-C5CC6D28215C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75C0F8F7-FA23-41FB-B9FF-23C2A21D1419}

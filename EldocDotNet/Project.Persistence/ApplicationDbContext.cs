@@ -50,5 +50,6 @@ namespace Project.Persistence
         public DbSet<BilateralContractTemplate> BilateralContractTemplates { get; set; }
         public DbSet<UnilateralContractTemplate> UnilateralContractTemplates { get; set; }
         public DbSet<FinancialContractTemplate> FinancialContractTemplates { get; set; }
+        public DbSet<Expert> Experts { get; set; }
     }
 }
