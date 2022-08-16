@@ -5,12 +5,11 @@ namespace Project.Domain.Entities
 {
     public class Transaction : BaseEntity
     {
-        public decimal Amount { get; set; }
-        public TransactionType Type { get; set; }
-        public bool IsSucceed { get; set; }
-        public string Message { get; set; }
-        public string AdditionalData { get; set; }
-        public int PaymentId { get; set; }
-        public Payment Payment { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
+        public double Amount { get; set; }
+        public TransactionType TransactionType { get; set; }
+        public PaymentType PaymentType { get; set; }
+        public string Description { get; set; }
     }
 }

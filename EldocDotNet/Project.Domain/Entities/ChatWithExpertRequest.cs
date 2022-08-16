@@ -12,5 +12,6 @@ namespace Project.Domain.Entities
         public ChatWithExpertRequestStatus Status { get; set; }
         public string Description { get; set; }
         public double SessionFee { get; set; }
+        public bool IsPaid { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace Project.Application.Features.Interfaces
         Task<UserDTO> Login(LoginUser input);
         Task<bool> SetPassword(string newPassword);
         Task Signup(string phone);
+        Task UpdateBalance(double newBalance);
         Task<string> Verify(VerifyUser verify);
     }
 }

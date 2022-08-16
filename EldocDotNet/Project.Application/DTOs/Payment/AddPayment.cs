@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Project.Domain.Enums;
 
 namespace Project.Application.DTOs.Payment
 {
@@ -14,5 +10,8 @@ namespace Project.Application.DTOs.Payment
         public string GatewayAccountName { get; set; }
         public string Message { get; set; }
         public string AdditionalData { get; set; }
+        public string TransactionCode { get; set; }
+        public int UserId { get; set; }
+        public string PaymentUrl { get; set; }
     }
 }

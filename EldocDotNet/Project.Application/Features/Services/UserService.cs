@@ -156,6 +156,15 @@ namespace Project.Application.Features.Services
             return (UserDTO)_httpContextAccessor.HttpContext.Items["User"];
         }
 
+        public async Task UpdateBalance(double newBalance)
+        {
+            var model = _mapper.Map<User>(Current());
+
+            model.Balance = newBalance;
+
+            await _userRepository.Update(model);
+        }
+
         public async Task<UserDTO> GetProfile()
         {
             var userData = await _userRepository.GetNoTracking(Current().Id);

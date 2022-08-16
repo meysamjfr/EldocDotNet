@@ -31,5 +31,7 @@ namespace Project.Domain.Entities
         public string Birthdate { get; set; }
         public string SanaCode { get; set; }
         public string EconomicCode { get; set; }
+
+        public ICollection<Payment> Payments { get; set; }
     }
 }

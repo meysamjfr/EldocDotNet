@@ -2,6 +2,7 @@
 {
     public enum TransactionType
     {
-        normal
+        Deposit,
+        Withdraw
     }
 }

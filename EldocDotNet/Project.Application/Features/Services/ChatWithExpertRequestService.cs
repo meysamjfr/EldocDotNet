@@ -48,6 +48,7 @@ namespace Project.Application.Features.Services
                 Status = ChatWithExpertRequestStatus.Pending,
                 Description = "",
                 SessionFee = findExpert.SessionFee,
+                IsPaid = false,
             };
 
             await _chatWithExpertRequestRepository.Add(model);

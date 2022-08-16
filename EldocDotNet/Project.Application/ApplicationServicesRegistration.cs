@@ -37,6 +37,7 @@ namespace Project.Application
             services.AddScoped<IFinancialContractTemplateService, FinancialContractTemplateService>();
             services.AddScoped<IExpertService, ExpertService>();
             services.AddScoped<IChatWithExpertRequestService, ChatWithExpertRequestService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
             return services;
         }

@@ -107,10 +107,10 @@ namespace Project.Application.Profiles
 
             #region payments
             CreateMap<AddPayment, Payment>()
-                .ForMember(dest => dest.IsPaid, opt => opt.Ignore())
                 .ForMember(dest => dest.IsCompleted, opt => opt.Ignore())
                 .ForMember(dest => dest.TransactionCode, opt => opt.Ignore())
-                .ForMember(dest => dest.Token, opt => opt.Ignore())
+                .ForMember(dest => dest.PaymentType, opt => opt.Ignore())
+                .ForMember(dest => dest.TypeActionId, opt => opt.Ignore())
                 .ReverseMap();
             #endregion
 

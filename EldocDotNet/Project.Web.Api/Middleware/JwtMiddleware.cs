@@ -26,10 +26,10 @@ namespace Project.Web.Api.Middleware
 
             else
             {
-                //if (env.EnvironmentName == "Development")
-                //{
-                //    await AttachUserToContextAsync(context, userService, "meysam");
-                //}
+                if (env.EnvironmentName == "Development")
+                {
+                    await AttachUserToContextAsync(context, userService, "meysam");
+                }
             }
 
             await _next(context);

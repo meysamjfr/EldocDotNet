@@ -5,6 +5,8 @@ namespace Project.Application.Features.Interfaces
 {
     public interface IPaymentService
     {
-        Task<Payment> AddPayment(AddPayment addPayment);
+        Task AddCharge(AddPayment addPayment);
+        Task CheckTrackingNumber(long trackingNumber);
+        Task VerifyPayment(long trackingNumber, string transactionCode);
     }
 }
