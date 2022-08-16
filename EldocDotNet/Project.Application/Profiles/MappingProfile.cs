@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using NetTopologySuite.Geometries;
 using Project.Application.DTOs.BilateralContractTemplate;
+using Project.Application.DTOs.ChatWithExpertRequest;
 using Project.Application.DTOs.City;
 using Project.Application.DTOs.Expert;
 using Project.Application.DTOs.FAQ;
 using Project.Application.DTOs.FinancialContractTemplate;
 using Project.Application.DTOs.Page;
+using Project.Application.DTOs.Payment;
 using Project.Application.DTOs.Post;
 using Project.Application.DTOs.PostCategory;
 using Project.Application.DTOs.Province;
@@ -95,13 +97,29 @@ namespace Project.Application.Profiles
             CreateMap<Expert, ExpertDTO>()
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
                 .ReverseMap();
+
+            CreateMap<Expert, ExpertCompact>();
+
             CreateMap<Expert, UpsertExpert>()
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
                 .ReverseMap();
             #endregion
 
+            #region payments
+            CreateMap<AddPayment, Payment>()
+                .ForMember(dest => dest.IsPaid, opt => opt.Ignore())
+                .ForMember(dest => dest.IsCompleted, opt => opt.Ignore())
+                .ForMember(dest => dest.TransactionCode, opt => opt.Ignore())
+                .ForMember(dest => dest.Token, opt => opt.Ignore())
+                .ReverseMap();
+            #endregion
 
-
+            #region chat with expert request
+            CreateMap<ChatWithExpertRequest, ChatWithExpertRequestDTO>()
+                .ForMember(dest => dest.Expert, opt => opt.MapFrom(src => src.Expert.Name))
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User.Nickname))
+                .ReverseMap();
+            #endregion
         }
     }
 }

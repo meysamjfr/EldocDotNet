@@ -36,6 +36,9 @@ namespace Project.Persistence
             services.AddScoped<IBilateralContractTemplateRepository, BilateralContractTemplateRepository>();
             services.AddScoped<IFinancialContractTemplateRepository, FinancialContractTemplateRepository>();
             services.AddScoped<IExpertRepository, ExpertRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IChatWithExpertRequestRepository, ChatWithExpertRequestRepository>();
 
             return services;
         }

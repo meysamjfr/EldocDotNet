@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 
 namespace Project.Web.Api.Extensions
 {
@@ -24,24 +25,24 @@ namespace Project.Web.Api.Extensions
 
                 c.UseAllOfToExtendReferenceSchemas();
 
-                //c.AddEnumsWithValuesFixFilters(services, o =>
-                //{
-                //    o.ApplySchemaFilter = true;
+                c.AddEnumsWithValuesFixFilters(null, o =>
+                {
+                    o.ApplySchemaFilter = true;
 
-                //    o.XEnumNamesAlias = "x-enum-varnames";
+                    o.XEnumNamesAlias = "x-enum-varnames";
 
-                //    o.XEnumDescriptionsAlias = "x-enum-descriptions";
+                    o.XEnumDescriptionsAlias = "x-enum-descriptions";
 
-                //    o.ApplyParameterFilter = true;
+                    o.ApplyParameterFilter = true;
 
-                //    o.ApplyDocumentFilter = true;
+                    o.ApplyDocumentFilter = true;
 
-                //    o.IncludeDescriptions = true;
+                    o.IncludeDescriptions = true;
 
-                //    o.IncludeXEnumRemarks = true;
+                    o.IncludeXEnumRemarks = true;
 
-                //    o.DescriptionSource = DescriptionSources.DescriptionAttributesThenXmlComments;
-                //});
+                    o.DescriptionSource = DescriptionSources.DescriptionAttributesThenXmlComments;
+                });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {

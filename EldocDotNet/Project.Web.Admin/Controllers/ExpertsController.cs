@@ -71,15 +71,6 @@ namespace Project.Web.Admin.Controllers
             return Json(res);
         }
 
-        public async Task<JsonResult> GetAllPaginate(string name, int? page = 1)
-        {
-            var search = string.IsNullOrWhiteSpace(name) ? "" : name;
-
-            var res = await _expertService.GetAllPaginate(search, page ?? 1);
-
-            return Json(res);
-        }
-
         [DisplayName("حذف کارشناس")]
         public async Task<JsonResult> Delete(int id)
         {

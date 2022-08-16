@@ -111,13 +111,24 @@ namespace Project.Application.Features.Services
             return await data.ToDataTableAsync<Expert, ExpertDTO>(totalRecords, filtersFromRequest, _mapper);
         }
 
-        public async Task<List<ExpertDTO>> GetAllPaginate(string search, int page)
+        public async Task<List<ExpertDTO>> GetAll()
         {
-            var data = _expertRepository.GetAllQueryable()
-                .Where(w => w.IsActive == true && (w.Name.Contains(search) || w.Specialty.Contains(search) || w.Description.Contains(search)))
-                .AsNoTracking();
+            var data = await _expertRepository.GetAllQueryable()
+                .Where(w => w.IsActive == true)
+                .AsNoTracking()
+                .ToListAsync();
 
-            return _mapper.Map<List<ExpertDTO>>(await data.PaginateDefault(page).ToListAsync());
+            return _mapper.Map<List<ExpertDTO>>(data);
+        }
+
+        public async Task<List<ExpertCompact>> GetAllCompact()
+        {
+            var data = await _expertRepository.GetAllQueryable()
+                .Where(w => w.IsActive == true)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return _mapper.Map<List<ExpertCompact>>(data);
         }
 
         private async Task<bool> IsUsernameUnique(string username, int currentUserId = 0)

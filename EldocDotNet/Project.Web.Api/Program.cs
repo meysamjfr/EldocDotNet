@@ -1,4 +1,8 @@
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Parbad.Builder;
+using Parbad.Gateway.Mellat;
+using Parbad.Gateway.ZarinPal;
 using Project.Application;
 using Project.Application.Filters;
 using Project.Application.Middlewares;
@@ -7,6 +11,7 @@ using Project.Infrastructure;
 using Project.Persistence;
 using Project.Web.Api.Extensions;
 using Project.Web.Api.Middleware;
+using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,25 +37,44 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDoc();
 builder.Services.AddSwaggerGenNewtonsoftSupport();
 
-
 builder.Services.AddCors(o =>
 {
     var allowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins");
     var allowedOriginsList = allowedOrigins.Split(',');
-    //var allowedOrigins = builder.Configuration.GetValue<string[]>("AllowedOrigins");
     o.AddPolicy("CorsPolicy",
         builder => builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "https://localhost:3000", "https://localhost:3001", "http://eldoc.ir", "https://eldoc.ir")
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
 
+builder.Services
+    .AddParbad()
+    .ConfigureGateways(gateways =>
+    {
+        gateways.AddZarinPal()
+            .WithAccounts(accounts =>
+            {
+                accounts.AddInMemory(account =>
+                {
+                    account.IsSandbox = true;
+                    account.MerchantId = "a9d78d36-ec9a-4545-aa16-2fdaec543eeb";
+                });
+            });
+    })
+    //.ConfigureAutoIncrementTrackingNumber(options =>
+    //{
+    //    options.MinimumValue = 1000;
+    //    options.Increment = 1;
+    //})
+    .ConfigureHttpContext(builder => builder.UseDefaultAspNetCore())
+    .ConfigureStorage(builder => builder.UseMemoryCache());
 
 var app = builder.Build();
 
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseDeveloperExceptionPage();
-//}
+}
 
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<JwtMiddleware>();
@@ -73,38 +97,7 @@ app.UseAuthorization();
 
 app.UseCors("CorsPolicy");
 
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapControllers();
-//});
 app.MapControllers();
 app.MapFallbackToController("notfoundpage", "error");
 
 app.Run();
-
-
-//var builder = WebApplication.CreateBuilder(args);
-
-//// Add services to the container.
-
-//builder.Services.AddControllers();
-//// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-//builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
-
-//var app = builder.Build();
-
-//// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
-
-//app.UseHttpsRedirection();
-
-//app.UseAuthorization();
-
-//app.MapControllers();
-
-//app.Run();

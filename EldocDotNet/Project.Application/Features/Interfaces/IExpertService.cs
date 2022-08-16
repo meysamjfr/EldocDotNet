@@ -9,7 +9,8 @@ namespace Project.Application.Features.Interfaces
         Task<DatatableResponse<ExpertDTO>> Datatable(DatatableInput input, FiltersFromRequestDataTable filtersFromRequest);
         Task Delete(int id);
         Task<ExpertDTO> Edit(UpsertExpert edit);
-        Task<List<ExpertDTO>> GetAllPaginate(string search, int page);
+        Task<List<ExpertDTO>> GetAll();
+        Task<List<ExpertCompact>> GetAllCompact();
         Task<UpsertExpert> GetToEdit(int id);
         Task<ExpertDTO> Login(ExpertLogin input);
     }
