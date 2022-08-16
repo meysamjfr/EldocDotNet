@@ -12,5 +12,6 @@ namespace Project.Application.Features.Interfaces
         Task<bool> CompleteRequest(int requestId, int expertId);
         Task<DatatableResponse<ChatWithExpertRequestDTO>> Datatable(DatatableInput input, FiltersFromRequestDataTable filtersFromRequest);
         Task<bool> RejectRequest(int requestId, int expertId);
+        Task<bool> PayRequestWithBalance(int requestId);
     }
 }

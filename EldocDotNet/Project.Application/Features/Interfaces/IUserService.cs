@@ -6,6 +6,7 @@ namespace Project.Application.Features.Interfaces
 {
     public interface IUserService
     {
+        Task<bool> CheckBalance(double amount);
         UserDTO Current();
         Task<DatatableResponse<UserDTO>> Datatable(UserDatatableInput input, FiltersFromRequestDataTable filtersFromRequest);
         Task<UserDTO> EditProfile(EditUserProfile input);

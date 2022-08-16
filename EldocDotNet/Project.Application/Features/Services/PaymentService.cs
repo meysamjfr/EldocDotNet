@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Parbad;
-using Parbad.Gateway.ZarinPal;
 using Project.Application.Contracts.Persistence;
 using Project.Application.DTOs.Payment;
 using Project.Application.Exceptions;
@@ -13,19 +11,17 @@ namespace Project.Application.Features.Services
 {
     public class PaymentService : IPaymentService
     {
-        private readonly ITransactionRepository _transactionRepository;
         private readonly IPaymentRepository _paymentRepository;
         private readonly IMapper _mapper;
-        private readonly IOnlinePayment _onlinePayment;
         private readonly IUserService _userService;
+        private readonly ITransactionService _transactionService;
 
-        public PaymentService(ITransactionRepository transactionRepository, IPaymentRepository paymentRepository, IMapper mapper, IOnlinePayment onlinePayment, IUserService userService)
+        public PaymentService(IPaymentRepository paymentRepository, IMapper mapper, IUserService userService, ITransactionService transactionService)
         {
-            _transactionRepository = transactionRepository;
             _paymentRepository = paymentRepository;
             _mapper = mapper;
-            _onlinePayment = onlinePayment;
             _userService = userService;
+            _transactionService = transactionService;
         }
 
         public async Task AddCharge(AddPayment addPayment)
@@ -63,25 +59,12 @@ namespace Project.Application.Features.Services
             find.IsCompleted = true;
             find.TransactionCode = transactionCode;
 
-            var newTransaction = new Transaction
-            {
-                UserId = find.UserId,
-                PaymentType = find.PaymentType,
-                Amount = find.Amount,
-                Description = $"کد پرداخت: #{find.TrackingNumber}",
-                TransactionType = TransactionType.Deposit,
-            };
-
-            await _transactionRepository.Add(newTransaction);
-
             await _paymentRepository.Update(find);
 
             switch (find.PaymentType)
             {
                 case PaymentType.Charge:
-                    var newBalance = await _transactionRepository.GetAllQueryable()
-                        .Where(w => w.UserId == newTransaction.UserId && w.IsActive == true && w.PaymentType == PaymentType.Charge && w.TransactionType == TransactionType.Deposit)
-                        .SumAsync(s => s.Amount);
+                    var newBalance = await _transactionService.Charge(find.UserId, find.Amount, $"کد پرداخت: #{find.TrackingNumber}");
                     await _userService.UpdateBalance((double)newBalance);
                     break;
 
@@ -94,60 +77,5 @@ namespace Project.Application.Features.Services
             }
 
         }
-
-
-        //public async Task<string> PayChatWithExpertRequest(int requestId, decimal amount)
-        //{
-        //    var payment = await _paymentRepository.GetAllQueryable()
-        //        .FirstOrDefaultAsync(f => f.Token == $"chatwithexpertrequest-#{requestId}");
-
-        //    if (payment == null)
-        //    {
-        //        var callbackUrl = "https://api.eldoc.ir/api/payment/verify";
-
-        //        IPaymentRequestResult result = await _onlinePayment.RequestAsync(invoice =>
-        //        {
-        //            invoice
-        //                .SetZarinPalData($"پرداخت فاکتور - درخواست مذاکره با کارشناس")
-        //                .SetTrackingNumber(DateTime.Now.Ticks)
-        //                .SetAmount(amount)
-        //                .SetCallbackUrl(callbackUrl)
-        //                .UseZarinPal();
-        //        });
-
-        //        if (result.IsSucceed)
-        //        {
-        //            payment = new Payment
-        //            {
-        //                Amount = amount,
-        //                GatewayAccountName = result.GatewayAccountName,
-        //                GatewayName = result.GatewayName,
-        //                IsCompleted = false,
-        //                Token = $"chatwithexpertrequest-#{requestId}",
-        //                TransactionCode = Guid.NewGuid().ToString(),
-        //                TrackingNumber = result.TrackingNumber,
-        //            };
-
-        //            await _paymentRepository.Add(payment);
-
-        //            return result.GatewayTransporter.Descriptor.Url;
-        //        }
-
-        //        throw new BadRequestException($"خطای درگاه - {result.Message}");
-        //    }
-
-        //    if (payment.IsCompleted == true)
-        //    {
-        //        throw new BadRequestException("این درخواست از قبل تکمیل شده بود");
-        //    }
-
-
-        //    throw new BadRequestException("خطای نامشخص");
-        //}
-
-        //public async Task PayChatWithExpertRequestPayment(IPaymentFetchResult fetchResult)
-        //{
-
-        //}
     }
 }

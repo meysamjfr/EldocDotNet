@@ -156,6 +156,12 @@ namespace Project.Application.Features.Services
             return (UserDTO)_httpContextAccessor.HttpContext.Items["User"];
         }
 
+        public async Task<bool> CheckBalance(double amount)
+        {
+            return await _userRepository.GetAllQueryable()
+                .AnyAsync(a => a.Id == Current().Id && a.Balance > amount);
+        }
+
         public async Task UpdateBalance(double newBalance)
         {
             var model = _mapper.Map<User>(Current());

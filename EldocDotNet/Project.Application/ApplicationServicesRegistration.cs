@@ -38,6 +38,7 @@ namespace Project.Application
             services.AddScoped<IExpertService, ExpertService>();
             services.AddScoped<IChatWithExpertRequestService, ChatWithExpertRequestService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<ITransactionService, TransactionService>();
 
             return services;
         }

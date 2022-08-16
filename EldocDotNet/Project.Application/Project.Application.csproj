@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -21,9 +21,5 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Parbad" Version="3.8.3" />
-		<PackageReference Include="Parbad.AspNetCore" Version="1.2.0" />
-		<PackageReference Include="Parbad.Storage.Cache" Version="1.2.0" />
-		<PackageReference Include="Parbad.Gateway.ZarinPal" Version="1.2.0" />
 	</ItemGroup>
 </Project>

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Project.Application.Contracts.Persistence;
 using Project.Application.DTOs.ChatWithExpertRequest;
 using Project.Application.DTOs.Datatable.Base;
-using Project.Application.DTOs.User;
 using Project.Application.Exceptions;
 using Project.Application.Extensions;
 using Project.Application.Features.Interfaces;
@@ -16,21 +15,21 @@ namespace Project.Application.Features.Services
     {
         private readonly IChatWithExpertRequestRepository _chatWithExpertRequestRepository;
         private readonly IMapper _mapper;
-        private readonly UserDTO currentUser;
+        private readonly IUserService _userService;
         private readonly IExpertRepository _expertRepository;
-        private readonly IExpertService _expertService;
+        private readonly ITransactionService _transactionService;
 
         public ChatWithExpertRequestService(IChatWithExpertRequestRepository chatWithExpertRequestRepository,
                                             IMapper mapper,
                                             IUserService userService,
                                             IExpertRepository expertRepository,
-                                            IExpertService expertService)
+                                            ITransactionService transactionService)
         {
             _chatWithExpertRequestRepository = chatWithExpertRequestRepository;
             _mapper = mapper;
-            currentUser = userService.Current();
+            _userService = userService;
             _expertRepository = expertRepository;
-            _expertService = expertService;
+            _transactionService = transactionService;
         }
 
         public async Task<ChatWithExpertRequestDTO> CreateRequestByUser(int expertId)
@@ -44,22 +43,51 @@ namespace Project.Application.Features.Services
             var model = new ChatWithExpertRequest
             {
                 ExpertId = expertId,
-                UserId = currentUser.Id,
+                UserId = _userService.Current().Id,
                 Status = ChatWithExpertRequestStatus.Pending,
                 Description = "",
                 SessionFee = findExpert.SessionFee,
                 IsPaid = false,
             };
 
+            if (await _userService.CheckBalance(model.SessionFee))
+            {
+                var newBalance = await _transactionService.PayChatWithExpertRequest(_userService.Current().Id, model.SessionFee, $"پرداخت از اعتبار حساب");
+                await _userService.UpdateBalance(newBalance);
+                model.IsPaid = true;
+            }
+
             await _chatWithExpertRequestRepository.Add(model);
 
             return _mapper.Map<ChatWithExpertRequestDTO>(model);
         }
 
+        public async Task<bool> PayRequestWithBalance(int requestId)
+        {
+            var findRequest = await _chatWithExpertRequestRepository.GetNoTracking(requestId);
+
+            if(findRequest == null)
+            {
+                throw new NotFoundException();
+            }
+
+            if (await _userService.CheckBalance(findRequest.SessionFee))
+            {
+                var newBalance = await _transactionService.PayChatWithExpertRequest(_userService.Current().Id, findRequest.SessionFee, $"پرداخت از اعتبار حساب");
+                await _userService.UpdateBalance(newBalance);
+                findRequest.IsPaid = true;
+                await _chatWithExpertRequestRepository.Update(findRequest);
+
+                return true;
+            }
+
+            throw new BadRequestException("اعتبار حساب کافی نیست");
+        }
+
         public async Task<List<ChatWithExpertRequestDTO>> AllRequestsByUser()
         {
             var items = await _chatWithExpertRequestRepository.GetAllQueryable()
-                .Where(w => w.IsActive == true && w.UserId == currentUser.Id)
+                .Where(w => w.IsActive == true && w.UserId == _userService.Current().Id)
                 .Include(i => i.User)
                 .Include(i => i.Expert)
                 .ToListAsync();
@@ -71,7 +99,7 @@ namespace Project.Application.Features.Services
         {
             var find = await _chatWithExpertRequestRepository.GetNoTracking(requestId);
 
-            if (find == null || find.UserId != currentUser.Id)
+            if (find == null || find.UserId != _userService.Current().Id)
             {
                 throw new NotFoundException();
             }

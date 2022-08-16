@@ -30,7 +30,7 @@ namespace Project.Persistence.Repositories
 
         public IQueryable<T> GetAllQueryable()
         {
-            return _dbContext.Set<T>().AsQueryable();
+            return _dbContext.Set<T>().AsNoTracking().AsQueryable();
         }
 
         public async Task<T> Add(T entity)
