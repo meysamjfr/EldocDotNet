@@ -39,6 +39,8 @@ namespace Project.Persistence
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IChatWithExpertRequestRepository, ChatWithExpertRequestRepository>();
+            services.AddScoped<IChatWithExpertRepository, ChatWithExpertRepository>();
+            services.AddScoped<IChatWithExpertMessageRepository, ChatWithExpertMessageRepository>();
 
             return services;
         }

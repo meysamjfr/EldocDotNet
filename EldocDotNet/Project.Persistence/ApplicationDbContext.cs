@@ -54,5 +54,7 @@ namespace Project.Persistence
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<ChatWithExpertRequest> ChatWithExpertRequests { get; set; }
+        public DbSet<ChatWithExpert> ChatWithExperts { get; set; }
+        public DbSet<ChatWithExpertMessage> ChatWithExpertMessages { get; set; }
     }
 }

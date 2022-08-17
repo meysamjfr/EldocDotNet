@@ -14,4 +14,5 @@ namespace Project.Application.Features.Interfaces
         Task<bool> RejectRequest(int requestId, int expertId);
         Task<bool> PayRequestWithBalance(int requestId);
     }
+
 }

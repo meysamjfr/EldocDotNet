@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using NetTopologySuite.Geometries;
 using Project.Application.DTOs.BilateralContractTemplate;
+using Project.Application.DTOs.ChatWithExpert;
+using Project.Application.DTOs.ChatWithExpertMessage;
 using Project.Application.DTOs.ChatWithExpertRequest;
 using Project.Application.DTOs.City;
 using Project.Application.DTOs.Expert;
@@ -123,8 +125,21 @@ namespace Project.Application.Profiles
 
             #region chat with expert request
             CreateMap<ChatWithExpertRequest, ChatWithExpertRequestDTO>()
-                .ForMember(dest => dest.Expert, opt => opt.MapFrom(src => src.Expert.Name))
-                .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User.Nickname))
+                .ForMember(dest => dest.Expert, opt => opt.MapFrom(src => src.Expert == null ? "" : src.Expert.Name))
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User == null ? "" : src.User.Nickname))
+                .ReverseMap();
+            #endregion
+
+            #region chat with expert 
+            CreateMap<ChatWithExpert, ChatWithExpertDTO>()
+                .ForMember(dest => dest.Expert, opt => opt.MapFrom(src => src.Expert == null ? "" : src.Expert.Name))
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User == null ? "" : src.User.Nickname))
+                .ForMember(dest => dest.TotalMessages, opt => opt.MapFrom(src => src.Messages == null ? 0 : src.Messages.Count))
+                .ReverseMap();
+            #endregion
+
+            #region chat with expert messages
+            CreateMap<ChatWithExpertMessage, ChatWithExpertMessageDTO>()
                 .ReverseMap();
             #endregion
 
