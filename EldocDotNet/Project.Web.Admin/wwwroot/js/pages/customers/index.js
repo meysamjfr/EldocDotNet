@@ -37,7 +37,7 @@ var KTDatatablesServerSide = function () {
                     className: 'text-end',
                     render: function (data, type, row, meta) {
                         let html = '<div class="btn-group btn-group-sm px-2">';
-                        //html += `<a href="/transactions?userId=${data}" class="btn btn-sm btn-icon btn-info" data-bs-toggle="tooltip" title="تراکنش ها"><i class="bi bi-cash-stack"></i></a>`;
+                        html += `<a href="/transactions?userId=${data}" class="btn btn-sm btn-icon btn-info" data-bs-toggle="tooltip" title="تراکنش ها"><i class="bi bi-cash-stack"></i></a>`;
                         //html += `<a href="/usercards?userId=${data}" class="btn btn-sm btn-icon btn-info" data-bs-toggle="tooltip" title="کارت ها"><i class="bi bi-credit-card"></i></a>`;
                         html += "</div>";
                         return html;

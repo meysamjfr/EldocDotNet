@@ -60,3 +60,16 @@ const financialContractTypeDTO = {
     1: { 'title': "پیش فاکتور", },
     2: { 'title': "صورت حساب", },
 };
+
+const transactionType = {
+    0: { 'class': 'success' },
+    1: { 'class': 'danger' },
+};
+
+const paymentType = {
+    0: { 'title': "شارژ حساب" },
+    1: { 'title': "درخواست مذاکره" },
+    2: { 'title': "شارژ مدیر" },
+    3: { 'title': "برداشت مدیر" },
+    4: { 'title': "هدیه" },
+};

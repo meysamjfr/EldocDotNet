@@ -42,5 +42,12 @@
       "wwwroot/js/pages/financialcontracttemplates/index.js",
       "wwwroot/js/pages/financialcontracttemplates/upsert.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pages/transactions/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/pages/transactions/index.js",
+      "wwwroot/js/pages/transactions/upsert.js"
+    ]
   }
 ]

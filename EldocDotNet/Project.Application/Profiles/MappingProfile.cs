@@ -11,6 +11,7 @@ using Project.Application.DTOs.Payment;
 using Project.Application.DTOs.Post;
 using Project.Application.DTOs.PostCategory;
 using Project.Application.DTOs.Province;
+using Project.Application.DTOs.Transaction;
 using Project.Application.DTOs.UnilateralContractTemplate;
 using Project.Application.DTOs.User;
 using Project.Domain.Entities;
@@ -114,12 +115,19 @@ namespace Project.Application.Profiles
                 .ReverseMap();
             #endregion
 
+            #region transactions
+            CreateMap<Transaction, TransactionDTO>()
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User == null ? "" : src.User.Nickname))
+                .ReverseMap();
+            #endregion
+
             #region chat with expert request
             CreateMap<ChatWithExpertRequest, ChatWithExpertRequestDTO>()
                 .ForMember(dest => dest.Expert, opt => opt.MapFrom(src => src.Expert.Name))
                 .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User.Nickname))
                 .ReverseMap();
             #endregion
+
         }
     }
 }

@@ -11,10 +11,4 @@ namespace Project.Domain.Enums
         [EnumMember(Value = "جهت اطلاع")]
         JustForInformation
     }
-
-    public enum PaymentType
-    {
-        Charge,
-        ChatWithExpert,
-    }
 }

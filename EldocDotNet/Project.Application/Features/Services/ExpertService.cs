@@ -1,22 +1,13 @@
 ﻿using AutoMapper;
-using DNTPersianUtils.Core;
-using DNTPersianUtils.Core.IranCities;
 using Microsoft.EntityFrameworkCore;
 using Project.Application.Contracts.Infrastructure;
 using Project.Application.Contracts.Persistence;
-using Project.Application.DTOs.Charts;
-using Project.Application.DTOs.Datatable;
 using Project.Application.DTOs.Datatable.Base;
 using Project.Application.DTOs.Expert;
-using Project.Application.DTOs.User;
 using Project.Application.Exceptions;
 using Project.Application.Extensions;
 using Project.Application.Features.Interfaces;
 using Project.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Project.Application.Features.Services
 {
