@@ -61,9 +61,6 @@ KTUtil.onDOMContentLoaded(function (e) {
                         if (result.value) {
                             fetch(`${baseUrl}/finishchat?id=${wrapper.currentChatId}`)
                                 .then(response => response.json())
-                                .then(result => {
-                                    console.log(result);
-                                })
                                 .catch(error => toastr.error("خطای سرور"))
                                 .finally(() => {
                                     wrapper.GetChats();
@@ -164,12 +161,6 @@ KTUtil.onDOMContentLoaded(function (e) {
 
     connection.on("ReceiveMessage", function (group, message) {
         messagesContainer.insertAdjacentHTML('beforeend', otherMessage(message, wrapper.currentChatUser));
-        //var li = document.createElement("li");
-        //document.getElementById("messagesList").appendChild(li);
-        //// We can assign user-supplied strings to an element's textContent because it
-        //// is not interpreted as markup. If you're assigning in any other way, you 
-        //// should be aware of possible script injection concerns.
-        //li.textContent = `${user} says ${message}`;
     });
 
 });

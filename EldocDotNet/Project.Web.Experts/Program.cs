@@ -69,6 +69,16 @@ builder.Services.AddControllersWithViews().AddNewtonsoftJson(o =>
     //o.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
 });
 
+builder.Services.AddCors(o =>
+{
+    var allowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins");
+    var allowedOriginsList = allowedOrigins.Split(',');
+    o.AddPolicy("CorsPolicy",
+        builder => builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "https://localhost:3000", "https://localhost:3001", "http://eldoc.ir", "https://eldoc.ir")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+
 builder.Services
     .AddMvc(option =>
     {
@@ -134,6 +144,8 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors("CorsPolicy");
 
 app.UseEndpoints(endpoints =>
 {
