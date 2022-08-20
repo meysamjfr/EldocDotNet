@@ -90,5 +90,19 @@ namespace Project.Application.Features.Services
 
             return _mapper.Map<List<ChatWithExpertDTO>>(items);
         }
+
+        public async Task<List<ChatWithExpertDTO>> GetAllPaginate(string search, int page, int? expertId)
+        {
+            var items = await _chatWithExpertRepository.GetAllQueryable()
+                .Where(w => w.IsActive == true && w.Id.ToString().Contains(search))
+                .Where(w => !expertId.HasValue || w.ExpertId == expertId)
+                .PaginateDefault(page)
+                .Include(i => i.User)
+                .Include(i => i.Expert)
+                .Include(i => i.Messages)
+                .ToListAsync();
+
+            return _mapper.Map<List<ChatWithExpertDTO>>(items);
+        }
     }
 }

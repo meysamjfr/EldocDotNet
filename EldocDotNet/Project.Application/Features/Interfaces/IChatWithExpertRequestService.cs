@@ -1,5 +1,6 @@
 ﻿using Project.Application.DTOs.Datatable.Base;
 using Project.Application.DTOs.ChatWithExpertRequest;
+using Project.Application.DTOs.Datatable;
 
 namespace Project.Application.Features.Interfaces
 {
@@ -9,10 +10,9 @@ namespace Project.Application.Features.Interfaces
         Task<ChatWithExpertRequestDTO> CreateRequestByUser(int expertId);
         Task<List<ChatWithExpertRequestDTO>> AllRequestsByUser();
         Task<bool> CancelRequestByUser(int requestId);
-        Task<bool> CompleteRequest(int requestId, int expertId);
-        Task<DatatableResponse<ChatWithExpertRequestDTO>> Datatable(DatatableInput input, FiltersFromRequestDataTable filtersFromRequest);
         Task<bool> RejectRequest(int requestId, int expertId);
         Task<bool> PayRequestWithBalance(int requestId);
+        Task<DatatableResponse<ChatWithExpertRequestDTO>> Datatable(ChatWithExpertRequestDatatableInput input, FiltersFromRequestDataTable filtersFromRequest);
     }
 
 }

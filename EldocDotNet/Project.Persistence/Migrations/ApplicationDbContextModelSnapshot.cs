@@ -17,7 +17,7 @@ namespace Project.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -141,6 +141,92 @@ namespace Project.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BilateralContractTemplates");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.ChatWithExpert", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ExpertId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("InProgress")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpertId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChatWithExperts");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.ChatWithExpertMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ChatWithExpertId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ExpertSeen")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUser")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("UserSeen")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatWithExpertId");
+
+                    b.ToTable("ChatWithExpertMessages");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.ChatWithExpertRequest", b =>
@@ -843,6 +929,9 @@ namespace Project.Persistence.Migrations
                     b.Property<string>("Birthdate")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ConnectionId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -948,6 +1037,36 @@ namespace Project.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.ChatWithExpert", b =>
+                {
+                    b.HasOne("Project.Domain.Entities.Expert", "Expert")
+                        .WithMany()
+                        .HasForeignKey("ExpertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Expert");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.ChatWithExpertMessage", b =>
+                {
+                    b.HasOne("Project.Domain.Entities.ChatWithExpert", "ChatWithExpert")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatWithExpertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChatWithExpert");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.ChatWithExpertRequest", b =>
@@ -1058,6 +1177,11 @@ namespace Project.Persistence.Migrations
             modelBuilder.Entity("Project.Domain.Entities.Base.ContractBase", b =>
                 {
                     b.Navigation("PartyAttorneys");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.ChatWithExpert", b =>
+                {
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.PostCategory", b =>

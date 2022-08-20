@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Project.Application.Contracts.Persistence;
 using Project.Application.DTOs.ChatWithExpertRequest;
+using Project.Application.DTOs.Datatable;
 using Project.Application.DTOs.Datatable.Base;
 using Project.Application.Exceptions;
 using Project.Application.Extensions;
@@ -18,18 +19,21 @@ namespace Project.Application.Features.Services
         private readonly IUserService _userService;
         private readonly IExpertRepository _expertRepository;
         private readonly ITransactionService _transactionService;
+        private readonly IChatWithExpertService _chatWithExpertService;
 
         public ChatWithExpertRequestService(IChatWithExpertRequestRepository chatWithExpertRequestRepository,
                                             IMapper mapper,
                                             IUserService userService,
                                             IExpertRepository expertRepository,
-                                            ITransactionService transactionService)
+                                            ITransactionService transactionService,
+                                            IChatWithExpertService chatWithExpertService)
         {
             _chatWithExpertRequestRepository = chatWithExpertRequestRepository;
             _mapper = mapper;
             _userService = userService;
             _expertRepository = expertRepository;
             _transactionService = transactionService;
+            _chatWithExpertService = chatWithExpertService;
         }
 
         public async Task<ChatWithExpertRequestDTO> CreateRequestByUser(int expertId)
@@ -66,7 +70,7 @@ namespace Project.Application.Features.Services
         {
             var findRequest = await _chatWithExpertRequestRepository.GetNoTracking(requestId);
 
-            if(findRequest == null)
+            if (findRequest == null)
             {
                 throw new NotFoundException();
             }
@@ -124,6 +128,8 @@ namespace Project.Application.Features.Services
 
             await _chatWithExpertRequestRepository.Update(find);
 
+            await _chatWithExpertService.Create(find.UserId, find.ExpertId);
+
             return true;
         }
 
@@ -143,26 +149,11 @@ namespace Project.Application.Features.Services
             return true;
         }
 
-        public async Task<bool> CompleteRequest(int requestId, int expertId)
-        {
-            var find = await _chatWithExpertRequestRepository.GetNoTracking(requestId);
-
-            if (find == null || find.ExpertId != expertId)
-            {
-                throw new NotFoundException();
-            }
-
-            find.Status = ChatWithExpertRequestStatus.Completed;
-
-            await _chatWithExpertRequestRepository.Update(find);
-
-            return true;
-        }
-
-        public async Task<DatatableResponse<ChatWithExpertRequestDTO>> Datatable(DatatableInput input, FiltersFromRequestDataTable filtersFromRequest)
+        public async Task<DatatableResponse<ChatWithExpertRequestDTO>> Datatable(ChatWithExpertRequestDatatableInput input, FiltersFromRequestDataTable filtersFromRequest)
         {
             var data = _chatWithExpertRequestRepository.GetAllQueryable()
                 .Where(w => w.IsActive == input.IsActive)
+                .Where(w => !input.ExpertId.HasValue || w.ExpertId == input.ExpertId)
                 .Include(i => i.User)
                 .Include(i => i.Expert)
                 .AsNoTracking();

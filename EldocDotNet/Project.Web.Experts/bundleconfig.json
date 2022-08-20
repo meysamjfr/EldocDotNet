@@ -1,0 +1,23 @@
+[
+  {
+    "outputFileName": "wwwroot/js/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/custom.js",
+      "wwwroot/js/enums.js",
+      "wwwroot/js/jalali-moment.browser.js",
+      "wwwroot/js/select2.fa.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pages/requests/index.min.js",
+    "inputFiles": [
+      "wwwroot/js/pages/requests/index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pages/chats/index.min.js",
+    "inputFiles": [
+      "wwwroot/js/pages/chats/index.js"
+    ]
+  }
+]

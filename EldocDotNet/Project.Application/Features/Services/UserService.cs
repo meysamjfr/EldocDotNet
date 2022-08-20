@@ -222,6 +222,15 @@ namespace Project.Application.Features.Services
             return await data.ToDataTableAsync<User, UserDTO>(totalRecords, filtersFromRequest, _mapper);
         }
 
+        public async Task<UserDTO> SetConnectionId(string connectionId)
+        {
+            var user = await _userRepository.GetNoTracking(Current().Id);
+            user.ConnectionId = connectionId;
+            await _userRepository.Update(user);
+
+            return _mapper.Map<UserDTO>(user);
+        }
+
         private string GenerateToken(User user)
         {
             var securityTokenHandler = new JwtSecurityTokenHandler();

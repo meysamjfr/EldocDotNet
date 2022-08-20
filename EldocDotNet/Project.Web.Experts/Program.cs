@@ -5,6 +5,7 @@ using Project.Application.Filters;
 using Project.Application.Middlewares;
 using Project.Infrastructure;
 using Project.Persistence;
+using Project.Web.Experts;
 using System.IO.Compression;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -78,6 +79,8 @@ builder.Services
         options.ViewLocationFormats.Add("/{0}.cshtml");
     });
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
@@ -147,5 +150,7 @@ app.UseMvc(routes =>
       template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 });
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

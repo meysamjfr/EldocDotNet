@@ -14,6 +14,7 @@ namespace Project.Application.Features.Interfaces
         Task<UserDTO> GetByToken(string token);
         Task<UserDTO> GetProfile();
         Task<UserDTO> Login(LoginUser input);
+        Task<UserDTO> SetConnectionId(string connectionId);
         Task<bool> SetPassword(string newPassword);
         Task Signup(string phone);
         Task UpdateBalance(double newBalance);

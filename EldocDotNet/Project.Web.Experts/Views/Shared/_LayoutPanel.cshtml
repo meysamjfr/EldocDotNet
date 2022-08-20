@@ -83,8 +83,8 @@
                                                         <img alt="Logo" src="/assets/media/avatars/blank.png" />
                                                     </div>
                                                     <div class="d-flex flex-column">
-                                                        <span class="fw-bolder d-flex align-items-center fs-5">@User.Identity.Name</span>
-                                                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">@(User.Claims.FirstOrDefault(f => f.Type == System.Security.Claims.ClaimTypes.Email).Value)</a>
+                                                        <span class="fw-bolder d-flex align-items-center fs-5">@User.Claims.FirstOrDefault(f => f.Type == System.Security.Claims.ClaimTypes.GivenName).Value</span>
+                                                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">@(User.Claims.FirstOrDefault(f => f.Type == System.Security.Claims.ClaimTypes.Surname).Value)</a>
                                                     </div>
                                                 </div>
                                             </div>

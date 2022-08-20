@@ -21,13 +21,9 @@ namespace Project.Web.Experts.Controllers
             _expertService = expertService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             ViewBag.Title = "داشبورد";
-
-            //var model = await _expertService.DashboardStats(int.Parse(HttpContext.User.Claims.FirstOrDefault(f => f.Type == "ExpertId").Value));
-
-            //return View(model);
 
             return View();
         }

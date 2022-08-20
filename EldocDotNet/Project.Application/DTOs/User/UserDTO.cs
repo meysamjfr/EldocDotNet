@@ -16,6 +16,7 @@ namespace Project.Application.DTOs.User
         public string Phone { get; set; }
         public double Balance { get; set; }
         public string Token { get; set; }
+        public string ConnectionId { get; set; }
         public DateTime LastLogin { get; set; }
 
         public string GetNickName() => $"{Firstname} {Lastname}".Trim();

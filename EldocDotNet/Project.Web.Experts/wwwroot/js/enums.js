@@ -60,3 +60,10 @@ const financialContractTypeDTO = {
     1: { 'title': "پیش فاکتور", },
     2: { 'title': "صورت حساب", },
 };
+
+const chatWithExpertRequestStatus = {
+    0: { 'title': "در انتظار تایید", 'class': 'light-info' },
+    1: { 'title': "تایید شده", 'class': 'light-success'  },
+    2: { 'title': "رد شده", 'class': 'light-danger'  },
+    3: { 'title': "لغو شده", 'class': 'light-warning'  },
+};

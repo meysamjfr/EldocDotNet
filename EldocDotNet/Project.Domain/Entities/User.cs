@@ -12,6 +12,7 @@ namespace Project.Domain.Entities
         public string Email { get; set; }
         public double Balance { get; set; }
         public string Token { get; set; }
+        public string ConnectionId { get; set; }
         public DateTime LastLogin { get; set; }
         public int VerificationCode { get; set; } = 0;
         public UserStatus Status { get; set; }

@@ -50,10 +50,10 @@ namespace Project.Web.Experts.Controllers
 
             var claims = new List<Claim>
                 {
-                    new Claim("ExpertId", user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, input.Username),
-                    new Claim(ClaimTypes.Email, user.Specialty),
-                    new Claim("FullName", user.Name),
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.Username),
+                    new Claim(ClaimTypes.GivenName, user.Name),
+                    new Claim(ClaimTypes.Surname, user.Specialty),
                     new Claim(ClaimTypes.Role, "کارشناس"),
                     new Claim("DTO", JsonConvert.SerializeObject(user)),
                 };
