@@ -26,10 +26,10 @@ namespace Project.Application.Features.Services
             _chatWithExpertRepository = chatWithExpertRepository;
         }
 
-        private async Task<bool> IsChatWithExpertAvailableForUser(int chatWithExpertId)
+        public async Task<bool> IsChatWithExpertAvailableForUser(int chatWithExpertId, bool inProgress = true)
         {
             return await _chatWithExpertRepository.GetAllQueryable().AnyAsync(a => a.IsActive == true
-                                                                                   && a.InProgress == true
+                                                                                   && a.InProgress == inProgress
                                                                                    && a.UserId == currentUser.Id
                                                                                    && a.Id == chatWithExpertId);
         }
@@ -70,7 +70,7 @@ namespace Project.Application.Features.Services
 
         public async Task<List<ChatWithExpertMessageDTO>> GetAllMessagesByUser(int chatWithExpertId)
         {
-            if (await IsChatWithExpertAvailableForUser(chatWithExpertId) == false)
+            if (await IsChatWithExpertAvailableForUser(chatWithExpertId, inProgress: false) == false)
             {
                 throw new NotFoundException();
             }
@@ -93,7 +93,7 @@ namespace Project.Application.Features.Services
 
         public async Task SeenMessagesByUser(int chatWithExpertId)
         {
-            if (await IsChatWithExpertAvailableForUser(chatWithExpertId) == false)
+            if (await IsChatWithExpertAvailableForUser(chatWithExpertId, inProgress: false) == false)
             {
                 throw new NotFoundException();
             }

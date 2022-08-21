@@ -23,14 +23,6 @@ namespace Project.Web.Experts
             await base.OnConnectedAsync();
         }
 
-        public override async Task OnDisconnectedAsync(Exception exception)
-        {
-            //var chatUser = await _chatService.GetChatUser(Context.ConnectionId);
-            ////await Clients.All.SendAsync("LogMessage", string.Format("{0} disconnected", chatUser.Name));
-            //await _chatService.SetOffline(Context.ConnectionId);
-            await base.OnDisconnectedAsync(exception);
-        }
-
         public async Task SendMessageByExpert(int group, string message)
         {
             var res = await _chatWithExpertMessageService.AddMessageByExpert(group, message);
@@ -39,17 +31,29 @@ namespace Project.Web.Experts
             await Clients.Caller.SendAsync("ReceiveMyMessage", group, res);
         }
 
-
-        public async Task SendMessage(int group, string message)
+        public async Task SendMessageByUser(int group, string message)
         {
-            await Clients.All.SendAsync("ReceiveMessage", group, message);
+            if (_userService.Current() != null)
+            {
+                var res = await _chatWithExpertMessageService.AddMessageByUser(group, message);
+                await Clients.OthersInGroup(group.ToString()).SendAsync("ReceiveMessage", group, res);
+                await Clients.Caller.SendAsync("ReceiveMyMessage", group, res);
+            }
         }
 
         public async Task Join(int group)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, group.ToString());
-            //var chatUser = await _chatService.GetChatUser(Context.ConnectionId);
-            //await Clients.OthersInGroup(group).SendAsync("Join", chatUser.Name + " joined.");
+            if (_userService.Current() != null)
+            {
+                if (await _chatWithExpertMessageService.IsChatWithExpertAvailableForUser(group) == true)
+                {
+                    await Groups.AddToGroupAsync(Context.ConnectionId, group.ToString());
+                }
+            }
+            else
+            {
+                await Groups.AddToGroupAsync(Context.ConnectionId, group.ToString());
+            }
         }
 
         public Task Leave(int group)

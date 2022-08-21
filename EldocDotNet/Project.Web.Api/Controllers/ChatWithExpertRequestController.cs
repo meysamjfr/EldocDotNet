@@ -65,6 +65,5 @@ namespace Project.Web.Api.Controllers
 
             return new Response<bool>(res).ToJsonResult();
         }
-
     }
 }
