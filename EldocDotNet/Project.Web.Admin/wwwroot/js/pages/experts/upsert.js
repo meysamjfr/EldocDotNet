@@ -56,6 +56,25 @@ var KTDocsAdd = function () {
                             },
                         }
                     },
+                    SessionFee: {
+                        validators: {
+                            notEmpty: {
+                                message: "هزینه جلسه را وارد نکرده اید"
+                            }
+                        }
+                    },
+                    MaxActiveSessions: {
+                        validators: {
+                            notEmpty: {
+                                message: "حداکثر جلسات فعال را وارد نکرده اید"
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 30,
+                                message: "حداکثر جلسات فعال نمی‌تواند کمتر از 1 باشد"
+                            },
+                        }
+                    },
                     Username: {
                         validators: {
                             notEmpty: {

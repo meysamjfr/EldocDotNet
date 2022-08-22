@@ -40,7 +40,7 @@ var KTDatatablesServerSide = function () {
                     className: 'text-end',
                     render: function (data, type, row, meta) {
                         let html = '<div class="btn-group btn-group-sm px-2">';
-                        html += `<a href="${baseUrl}/upsert/${data}" class="btn btn-sm btn-icon btn-info" data-bs-toggle="tooltip" title="ویرایش" data-index="${meta.row}"><i class="bi bi-pencil-square"></i></a>`;
+                        html += `<a href="${baseUrl}/upsert?id=${data}" class="btn btn-sm btn-icon btn-info" data-bs-toggle="tooltip" title="ویرایش" data-index="${meta.row}"><i class="bi bi-pencil-square"></i></a>`;
                         html += `<button class="btn btn-sm btn-icon btn-light-danger" data-kt-docs-table-action="delete_row" data-bs-toggle="tooltip" title="حذف" data-id="${data}"><i class="bi bi-trash"></i></button>`;
                         html += "</div>";
                         return html;

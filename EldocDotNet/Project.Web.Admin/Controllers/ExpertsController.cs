@@ -29,23 +29,20 @@ namespace Project.Web.Admin.Controllers
             return View();
         }
 
-        [DisplayName("ثبت کارشناس")]
-        [HttpGet("[controller]/upsert")]
-        public IActionResult Upsert()
-        {
-            ViewBag.Title = "ثبت کارشناس";
-            return View();
-        }
-
-        [DisplayName("ویرایش کارشناس")]
-        [HttpGet("[controller]/upsert/{id:int}")]
+        [DisplayName("ثبت و ویرایش کارشناس")]
         public async Task<IActionResult> Upsert(int id)
         {
+            ViewBag.Title = "ثبت کارشناس";
+            if (id < 1)
+            {
+                return View();
+            }
+
             var res = await _expertService.GetToEdit(id);
 
             if (res == null)
             {
-                return NotFound();
+                return View();
             }
 
             ViewBag.Title = $"ویرایش کارشناس: {res.Name}";

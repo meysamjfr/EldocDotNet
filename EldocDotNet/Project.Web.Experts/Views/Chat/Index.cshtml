@@ -23,12 +23,12 @@
                     <div class="fw-bold text-gray-400 mb-6">{{item.updatedAtFormatted}}</div>
                     <div class="d-flex flex-center flex-wrap mb-5">
                         <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mx-3 mb-3">
-                            <div class="fs-6 fw-bolder text-gray-700">{{item.totalMessages}}</div>
+                            <span class="fs-6 fw-bolder text-gray-700">{{item.totalMessages}}</span>
                             <div class="fw-bold text-gray-400">کل پیام ها</div>
                         </div>
                         <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 mx-3 px-4 mb-3">
-                            <div class="fs-6 fw-bolder text-gray-700">{{item.unreadMessages}}</div>
-                            <div class="fw-bold text-gray-400">پیام جدید</div>
+                            <code class="fs-6 fw-bolder">#{{item.id}}</code>
+                            <div class="fw-bold text-gray-400">کد درخواست</div>
                         </div>
                     </div>
                     <button v-if="item.inProgress" class="btn btn-sm btn-light-primary fw-bolder" data-kt-drawer-show="true" v-on:click="GetMessages(item.id,item.user)" data-kt-drawer-target="#kt_drawer_chat">ارسال پیام</button>
