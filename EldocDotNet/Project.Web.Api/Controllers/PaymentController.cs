@@ -28,9 +28,9 @@ namespace Project.Web.Api.Controllers
         [HttpPost("charge")]
         [Produces(typeof(Response<string>))]
         [UserAuthorize]
-        public async Task<JsonResult> Charge([FromForm] decimal amount)
+        public async Task<JsonResult> Charge([FromBody] decimal amount)
         {
-            var callbackUrl = "https://localhost:44321/api/payment/verify";
+            var callbackUrl = "https://api.eldoc.ir/api/payment/verify";
 
             IPaymentRequestResult result = await _onlinePayment.RequestAsync(invoice =>
             {

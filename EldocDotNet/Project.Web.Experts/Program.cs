@@ -71,12 +71,16 @@ builder.Services.AddControllersWithViews().AddNewtonsoftJson(o =>
 
 builder.Services.AddCors(o =>
 {
-    var allowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins");
-    var allowedOriginsList = allowedOrigins.Split(',');
+    //var allowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins");
+    //var allowedOriginsList = allowedOrigins.Split(',');
     o.AddPolicy("CorsPolicy",
-        builder => builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "https://localhost:3000", "https://localhost:3001", "http://eldoc.ir", "https://eldoc.ir")
-                          .AllowAnyMethod()
-                          .AllowAnyHeader());
+        builder => builder
+                            //.AllowAnyOrigin()
+                            .WithOrigins("https://localhost:5173", "http://localhost:5173", "ws://localhost:5173")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials());
+
 });
 
 builder.Services

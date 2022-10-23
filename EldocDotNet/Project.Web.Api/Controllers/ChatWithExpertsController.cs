@@ -37,7 +37,7 @@ namespace Project.Web.Api.Controllers
 
         [HttpGet("messages")]
         [Produces(typeof(Response<List<ChatWithExpertMessageDTO>>))]
-        public async Task<JsonResult> GetAllRequests(int chatWithExpertId)
+        public async Task<JsonResult> GetAllMessages(int chatWithExpertId)
         {
             var res = await _chatWithExpertMessageService.GetAllMessagesByUser(chatWithExpertId);
 

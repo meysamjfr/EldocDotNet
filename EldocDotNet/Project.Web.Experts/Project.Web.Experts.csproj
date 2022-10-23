@@ -13,6 +13,10 @@
 	  <None Include="bundleconfig.json" />
 	</ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\assets\**\*.*" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+		
 	<ItemGroup>
 		<ProjectReference Include="..\Project.Application\Project.Application.csproj" />
 		<ProjectReference Include="..\Project.Infrastructure\Project.Infrastructure.csproj" />
@@ -34,7 +38,4 @@
 		</PackageReference>
 	</ItemGroup>
 	
-	<ItemGroup>
-		<Content Update="wwwroot\assets\**\*.*" CopyToPublishDirectory="Never" />
-	</ItemGroup>
 </Project>

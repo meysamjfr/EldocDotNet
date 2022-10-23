@@ -41,6 +41,16 @@ namespace Project.Web.Experts
             }
         }
 
+        public async Task Save(string message)
+        {
+            //if (_userService.Current() != null)
+            //{
+            //    var res = await _chatWithExpertMessageService.AddMessageByUser(group, message);
+            //    await Clients.OthersInGroup(group.ToString()).SendAsync("ReceiveMessage", group, res);
+            //    await Clients.Caller.SendAsync("ReceiveMyMessage", group, res);
+            //}
+        }
+
         public async Task Join(int group)
         {
             if (_userService.Current() != null)

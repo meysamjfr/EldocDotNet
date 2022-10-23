@@ -18,7 +18,7 @@ namespace Project.Web.Api.Controllers
 
         [HttpGet]
         [Produces(typeof(Response<List<CityDTO>>))]
-        public async Task<JsonResult> Get([FromQuery] FilterCites filter)
+        public async Task<JsonResult> Get([FromBody] FilterCites filter)
         {
             var res = await _cityService.SearchCitiesWithProvince(filter);
 

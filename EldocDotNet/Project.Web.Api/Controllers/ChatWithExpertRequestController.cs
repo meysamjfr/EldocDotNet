@@ -23,7 +23,7 @@ namespace Project.Web.Api.Controllers
 
         [HttpPost("create")]
         [Produces(typeof(Response<ChatWithExpertRequestDTO>))]
-        public async Task<JsonResult> Create([FromForm] int expertId)
+        public async Task<JsonResult> Create([FromBody] int expertId)
         {
             var res = await _chatWithExpertRequestService.CreateRequestByUser(expertId);
 
@@ -50,7 +50,7 @@ namespace Project.Web.Api.Controllers
 
         [HttpPost("pay-request")]
         [Produces(typeof(Response<bool>))]
-        public async Task<JsonResult> PayRequest([FromForm] int requestId)
+        public async Task<JsonResult> PayRequest([FromBody] int requestId)
         {
             var res = await _chatWithExpertRequestService.PayRequestWithBalance(requestId);
 
@@ -59,7 +59,7 @@ namespace Project.Web.Api.Controllers
 
         [HttpPost("cancel")]
         [Produces(typeof(Response<bool>))]
-        public async Task<JsonResult> Cancel([FromForm] int requestId)
+        public async Task<JsonResult> Cancel([FromBody] int requestId)
         {
             var res = await _chatWithExpertRequestService.CancelRequestByUser(requestId);
 
