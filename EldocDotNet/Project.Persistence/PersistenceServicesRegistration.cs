@@ -41,6 +41,7 @@ namespace Project.Persistence
             services.AddScoped<IChatWithExpertRequestRepository, ChatWithExpertRequestRepository>();
             services.AddScoped<IChatWithExpertRepository, ChatWithExpertRepository>();
             services.AddScoped<IChatWithExpertMessageRepository, ChatWithExpertMessageRepository>();
+            services.AddScoped<IContractRepository, ContractRepository>();
 
             return services;
         }

@@ -5,6 +5,7 @@ using Project.Application.DTOs.ChatWithExpert;
 using Project.Application.DTOs.ChatWithExpertMessage;
 using Project.Application.DTOs.ChatWithExpertRequest;
 using Project.Application.DTOs.City;
+using Project.Application.DTOs.Contract;
 using Project.Application.DTOs.Expert;
 using Project.Application.DTOs.FAQ;
 using Project.Application.DTOs.FinancialContractTemplate;
@@ -16,7 +17,9 @@ using Project.Application.DTOs.Province;
 using Project.Application.DTOs.Transaction;
 using Project.Application.DTOs.UnilateralContractTemplate;
 using Project.Application.DTOs.User;
+using Project.Application.Helpers;
 using Project.Domain.Entities;
+using System.Reflection;
 
 namespace Project.Application.Profiles
 {
@@ -143,6 +146,20 @@ namespace Project.Application.Profiles
                 .ReverseMap();
             #endregion
 
+
+            #region contract
+            CreateMap<Contract, ContractDTO>()
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User == null ? "" : src.User.Nickname))
+                .ReverseMap();
+
+            CreateMap<CreateContract, Contract>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => Domain.Enums.ContractStatus.Draft))
+                .ForMember(dest => dest.BargainCode, opt => opt.MapFrom(src => PublicHelper.GetRandomInt()))
+                .ForMember(dest => dest.FactorId, opt => opt.Ignore())
+                .ForMember(dest => dest.User, opt => opt.Ignore())
+                .ForMember(dest => dest.UserId, opt => opt.Ignore())
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            #endregion
         }
     }
 }

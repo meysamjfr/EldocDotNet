@@ -21,9 +21,9 @@ namespace Project.Web.Api.Controllers
             _expertService = expertService;
         }
 
-        [HttpPost("create")]
+        [HttpGet("create")]
         [Produces(typeof(Response<ChatWithExpertRequestDTO>))]
-        public async Task<JsonResult> Create([FromBody] int expertId)
+        public async Task<JsonResult> Create(int expertId)
         {
             var res = await _chatWithExpertRequestService.CreateRequestByUser(expertId);
 

@@ -50,7 +50,6 @@ KTUtil.onDOMContentLoaded(function (e) {
                         messagesContainerBlockUI.release();
                         messagesContainer.scrollTop = messagesContainer.scrollHeight;
                     });
-
             },
             SetCurrentChatRead: function () {
                 fetch(`${baseUrl}/setread?id=${wrapper.currentChatId}`);

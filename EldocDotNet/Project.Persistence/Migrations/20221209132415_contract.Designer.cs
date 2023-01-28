@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project.Persistence;
 
@@ -11,9 +12,10 @@ using Project.Persistence;
 namespace Project.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221209132415_contract")]
+    partial class contract
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -355,31 +357,10 @@ namespace Project.Persistence.Migrations
                     b.Property<string>("SellerAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerAmountLetterFirst")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerAmountLetterLast")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerAmountLetterMiddle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerAmountNumberFirst")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerAmountNumberLast")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerAmountNumberMiddle")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SellerAutomobileDevice")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerBargainAlley")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerBargainBuilding")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerBargainCity")
@@ -400,9 +381,6 @@ namespace Project.Persistence.Migrations
                     b.Property<string>("SellerBargainProvince")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerBargainStreet")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SellerBargainUnit")
                         .HasColumnType("nvarchar(max)");
 
@@ -421,88 +399,16 @@ namespace Project.Persistence.Migrations
                     b.Property<string>("SellerChassisNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerCheckAccountBranchFirst")
+                    b.Property<string>("SellerCheckBank")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerCheckAccountBranchLast")
+                    b.Property<string>("SellerCheckBankBranch")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerCheckAccountBranchMiddle")
+                    b.Property<string>("SellerCheckDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerCheckAccountNumberFirst")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckAccountNumberLast")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckAccountNumberMiddle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckBAccountBankFirst")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckBAccountBankLast")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckBAccountBankMiddle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckBankBranchFirst")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckBankBranchLast")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckBankBranchMiddle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckBankFirst")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckBankLast")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckBankMiddle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckDateFirst")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckDateLast")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckDateMiddle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckNumberFirst")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckNumberLast")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerCheckNumberMiddle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerDelayPaymentLetter")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerDelayPaymentNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerDelayPossessionLetter")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerDelayPossessionNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerDocumentArticle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerDocumentClause")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerDocumentLink")
+                    b.Property<string>("SellerCheckNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerDong")
@@ -523,9 +429,6 @@ namespace Project.Persistence.Migrations
                     b.Property<string>("SellerInsuranceNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerIran")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("SellerIsCompany")
                         .HasColumnType("bit");
 
@@ -536,9 +439,6 @@ namespace Project.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerLastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerLawCourtResponsible")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerMobileNumber")
@@ -553,40 +453,10 @@ namespace Project.Persistence.Migrations
                     b.Property<string>("SellerOtherAttachments")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerOtherConsiderPresentation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerOtherItems")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerPoliceLicensePlateLetter")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SellerPoliceLicensePlateNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerPrepareDocumentCity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerPrepareDocumentClock")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerPrepareDocumentDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerPrepareDocumentDay")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerPrepareDocumentProvince")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerPrepaymentFirst")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerPrepaymentLast")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerPrepaymentMiddle")
+                    b.Property<string>("SellerPrepayment")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerRegistryCompanyCity")
@@ -602,9 +472,6 @@ namespace Project.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerRemainingValidity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerRemainingValidityLetter")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerSolarYearModel")
@@ -623,9 +490,6 @@ namespace Project.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerTotalAmountNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerTrackingCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerVinNumer")

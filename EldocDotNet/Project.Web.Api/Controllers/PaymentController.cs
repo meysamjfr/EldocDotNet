@@ -25,10 +25,10 @@ namespace Project.Web.Api.Controllers
             _userService = userService;
         }
 
-        [HttpPost("charge")]
+        [HttpGet("charge")]
         [Produces(typeof(Response<string>))]
         [UserAuthorize]
-        public async Task<JsonResult> Charge([FromBody] decimal amount)
+        public async Task<JsonResult> Charge(decimal amount)
         {
             var callbackUrl = "https://api.eldoc.ir/api/payment/verify";
 
@@ -72,11 +72,11 @@ namespace Project.Web.Api.Controllers
             {
                 case PaymentFetchResultStatus.Failed:
                     return File("/payment-failed.html", "text/html");
-                    //throw new BadRequestException($"خطا در دریافت اطلاعات پرداخت از درگاه - {invoice.Message}");
+                //throw new BadRequestException($"خطا در دریافت اطلاعات پرداخت از درگاه - {invoice.Message}");
 
                 case PaymentFetchResultStatus.AlreadyProcessed:
                     return File("/payment-succeed.html", "text/html");
-                    //throw new BadRequestException("از قبل تایید شده بود");
+                //throw new BadRequestException("از قبل تایید شده بود");
 
                 case PaymentFetchResultStatus.ReadyForVerifying:
                 default:
@@ -90,11 +90,11 @@ namespace Project.Web.Api.Controllers
             {
                 case PaymentVerifyResultStatus.Failed:
                     return File("/payment-failed.html", "text/html");
-                    //throw new BadRequestException($"خطا در تایید پرداخت- {invoice.Message}");
+                //throw new BadRequestException($"خطا در تایید پرداخت- {invoice.Message}");
 
                 case PaymentVerifyResultStatus.AlreadyVerified:
                     return File("/payment-succeed.html", "text/html");
-                    //throw new BadRequestException("از قبل تایید شده بود");
+                //throw new BadRequestException("از قبل تایید شده بود");
 
                 case PaymentVerifyResultStatus.Succeed:
                     await _paymentService.VerifyPayment(result.TrackingNumber, result.TransactionCode);
