@@ -25,6 +25,15 @@ namespace Project.Application.Features.Services
             currentUser = _userService.Current();
         }
 
+        public async Task<List<int>> GetAllMyContractBragainCodes()
+        {
+            var items = await _contractRepository.GetAllQueryable()
+                .Where(w => w.IsActive == true && w.UserId == currentUser.Id)
+                .Select(s => s.BargainCode)
+                .ToListAsync();
+            return items;
+        }
+        
         public async Task<ContractDTO> CreateContract(CreateContract input)
         {
             var model = _mapper.Map<Contract>(input);

@@ -68,7 +68,7 @@ namespace Project.Web.Api.Middleware
                     }
                 }
             }
-            catch(Exception e)
+            catch
             {
                 // do nothing if jwt validation fails
                 // user is not attached to context so request won't have access to secure routes

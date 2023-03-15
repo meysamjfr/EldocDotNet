@@ -12,7 +12,7 @@ namespace Project.Application.Helpers
         public const string NotValidValidationErrorMessage = "{0} نامعتبر است";
         public const string PhoneValidationErrorMessage = "شمراه همراه نامعتبر است";
 
-        public static bool IsValidMime(IFormFile? file, string[] mimeTypes)
+        public static bool IsValidMime(IFormFile file, string[] mimeTypes)
         {
             if (file == null)
             {
@@ -26,7 +26,7 @@ namespace Project.Application.Helpers
             return false;
         }
 
-        public static bool IsValidImage(IFormFile? file)
+        public static bool IsValidImage(IFormFile file)
         {
             if (file == null)
             {
@@ -43,7 +43,7 @@ namespace Project.Application.Helpers
             return true;
         }
 
-        public static bool IsValidVideo(IFormFile? file)
+        public static bool IsValidVideo(IFormFile file)
         {
             if (file == null)
             {
@@ -58,7 +58,7 @@ namespace Project.Application.Helpers
             return true;
         }
 
-        public static bool IsValidVoice(IFormFile? file)
+        public static bool IsValidVoice(IFormFile file)
         {
             if (file == null)
             {

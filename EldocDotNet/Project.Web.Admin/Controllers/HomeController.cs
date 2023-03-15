@@ -24,23 +24,23 @@ namespace Project.Web.Admin.Controllers
         }
 
         [HttpGet("/transactionschartdata")]
-        public async Task<JsonResult> TransactionsChartData()
+        public JsonResult TransactionsChartData()
         {
-            var res = await _dashboardService.TransactionsChart();
+            var res = _dashboardService.TransactionsChart();
             return Json(res);
         }
 
         [HttpGet("/transactionspiechartdata")]
-        public async Task<JsonResult> TransactionsPieChartData()
+        public JsonResult TransactionsPieChartData()
         {
-            var res = await _dashboardService.TransactionsPieChart();
+            var res = _dashboardService.TransactionsPieChart();
             return Json(res);
         }
 
         [HttpGet("/transactionschartpercitydata")]
-        public async Task<JsonResult> TransactionsChartPerCityData()
+        public JsonResult TransactionsChartPerCityData()
         {
-            var res = await _dashboardService.TransactionsChartPerCity();
+            var res = _dashboardService.TransactionsChartPerCity();
             return Json(res);
         }
     }

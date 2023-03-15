@@ -16,6 +16,7 @@ namespace Project.Application.Features.Interfaces
         Task<ContractDTO> CompleteLevel9(ContractLevel9 input);
         Task<ContractDTO> CreateContract(CreateContract input);
         Task<ContractDTO> EditContract(EditContract input);
+        Task<List<int>> GetAllMyContractBragainCodes();
         Task<ContractDTO> GetMyContract(int bargainCode);
         Task<string> GetMyContractHtml(int bargainCode);
     }

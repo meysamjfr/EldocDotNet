@@ -38,6 +38,14 @@ namespace Project.Web.Api.Controllers
         }
 
         [HttpGet("[action]")]
+        [Produces(typeof(Response<List<int>>))]
+        public async Task<JsonResult> GetAllMyContractBragainCodes()
+        {
+            var res = await _contractService.GetAllMyContractBragainCodes();
+            return new Response<List<int>>(res).ToJsonResult();
+        }
+
+        [HttpGet("[action]")]
         [Produces(typeof(Response<ContractDTO>))]
         public async Task<JsonResult> GetMyContract(int bargainCode)
         {

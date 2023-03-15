@@ -120,7 +120,7 @@ namespace Project.Application.Features.Services
             return res;
         }
 
-        public async Task<List<ColumnChartData>> TransactionsChart()
+        public List<ColumnChartData> TransactionsChart()
         {
             var resList = new List<ColumnChartData>
             {
@@ -159,7 +159,7 @@ namespace Project.Application.Features.Services
             return resList;
         }
 
-        public async Task<TransactionsPieChart> TransactionsPieChart()
+        public TransactionsPieChart TransactionsPieChart()
         {
             var result = new TransactionsPieChart();
 
@@ -185,7 +185,7 @@ namespace Project.Application.Features.Services
             return result;
         }
 
-        public async Task<ColumnChartData> TransactionsChartPerCity()
+        public ColumnChartData TransactionsChartPerCity()
         {
             var result = new ColumnChartData();
 
